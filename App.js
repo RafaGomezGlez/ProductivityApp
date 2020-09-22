@@ -1,46 +1,33 @@
-import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  SafeAreaView,
-  Dimensions,
-} from 'react-native';
-import {styles} from './styles';
-import {style} from './style';
+import React,{ Component } from 'react';
+import { Text, View, StyleSheet, TextInput, SafeAreaView, Button} from 'react-native';
+import {styles} from "./styles"
 
-const {width, height} = Dimensions.get('screen');
+class App extends Component{
+  constructor (props){
+    super(props);
+    this.state = {
+      name : "",
+      lastName : "",
+    }
+  }
 
-export default class App extends Component{
-  state = {
-    name: '',
-    lastName: '',
-  };
-  render() {
+  render (){
     return (
-      <View style={styles.container}>
-        <Text style={style.innerText}> APP V1 </Text>
-        <View>
-          <Text style={style.baseText}> Nombre </Text>
-          <TextInput style={styles.input} />
-        </View>
+      <SafeAreaView style = {styles.container}>
+        <Text style = {styles.title}> Productivity App</Text>
 
         <View>
-          <Text style={style.baseText}> Apellido </Text>
-          <TextInput style={styles.input} />
+          <Text style = {styles.inputTitle}> Nombre </Text>
+          <TextInput style = {styles.input}/>
+        </View>
+        <View>
+          <Text style = {styles.inputTitle}> Apellido </Text>
+          <TextInput style = {styles.input}/>
         </View>
 
-        <View>
-          <Text style={style.baseText}> Semestre </Text>
-          <TextInput style={styles.input} />
-        </View>
-
-        <View>
-          <Text style={style.baseText}> Carrera </Text>
-          <TextInput style={styles.input} />
-        </View>
-      </View>
-    );
+      </SafeAreaView>
+    )
   }
 }
+
+export default App

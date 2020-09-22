@@ -1,22 +1,30 @@
-import {StyleSheet, Dimensions} from 'react-native';
-const {width, height} = Dimensions.get('screen');
+import {StyleSheet, Dimensions} from "react-native";
+
+const { width, height } = Dimensions.get("screen");
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
+    flex: .5,
+    flexDirection: "column",
     justifyContent: 'center',
     alignItems: 'center',
   },
+  title: {
+    marginVertical: 80,
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: 'blue',
+  },
   input: {
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 1,
     width: width / 1.3,
-    padding: 10,
+    padding : 10,
   },
-  inputContainer: {
-    marginVertical: 30,
-  },
+  inputTitle: {
+    marginBottom: 5,
+    marginTop: 5,
+  }
 });
 
 export {styles};
