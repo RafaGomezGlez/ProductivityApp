@@ -4,6 +4,7 @@ import ProgressChart from './ProgressCircle'
 import {styles} from './Styles'
 
 
+
 export default class HomePageComponent extends React.Component{
   render(){
     return (
