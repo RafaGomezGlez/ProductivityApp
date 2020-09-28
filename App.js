@@ -1,37 +1,16 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, Button} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ProgressChart from './Ptr'
+import ProgressChart from './ProgressCircle'
 import Constants from 'expo-constants'
-
-
-class HomePageComponent extends React.Component{
-  render(){
-    return (
-      <View>
-        <Text style = {styles.HomePageTitle}> Home Page </Text>
-        <ProgressChart/>
-      </View>
-
-    );
-  }
-}
-
-const styles= StyleSheet.create({
-  HomePageTitle:{
-    paddingTop: Constants.statusBarHeight,
-    fontSize: 60,
-    fontWeight: 'bold',
-    marginBottom: 50,
-    alignSelf: 'center',
-  },
-})
-
+import HomePageComponent from './HomePage'
 
 function HomeScreen(){
   return (
+    <View>
     <HomePageComponent/>
+    </View>
   );
 }
 
@@ -59,7 +38,7 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" style={styles.IconFont} component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Statistics" component={StatisticsScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
