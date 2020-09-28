@@ -5,8 +5,8 @@ import {Dimensions} from "react-native";
 const screenWidth = Dimensions.get("window").width;
 
 const data = {
-  labels: ["Swim", "Bike", "Run", "prueba"], // optional
-  data: [0.5, 0.6, 0.8, 0.1],
+  labels: ["Swim", "Bike", "Run"], // optional
+  data: [0.5, 0.6, 0.8],
 };
 
 const chartConfig = {
