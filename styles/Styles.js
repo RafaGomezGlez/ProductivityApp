@@ -5,9 +5,8 @@ import Constants from 'expo-constants'
 const styles= StyleSheet.create({
   HomePageTitle:{
     paddingTop: Constants.statusBarHeight,
-    fontSize: 60,
+    fontSize:40,
     fontWeight: 'bold',
-    marginBottom: 50,
     alignSelf: 'center',
   },
 });

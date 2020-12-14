@@ -4,9 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import ProgressChart from './ProgressCircle'
+import ProgressChart from './components/ProgressCircle'
 import Constants from 'expo-constants'
-import HomePageComponent from './HomePage'
+import HomePageComponent from './screens/HomePage'
 
 import { Ionicons, AntDesign } from '@expo/vector-icons'
 
