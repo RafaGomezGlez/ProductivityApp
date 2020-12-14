@@ -5,6 +5,6 @@ that can help you understand in which parts you have to pay more attention.
 
 # Installing:
  npm intall expo
- npm install react-navigation
- npm install react-native-chart-kit
+ npm install react-navigation \n
+ npm i --save react-native-circular-progress react-native-svg
  npm install react-native-ionicons@^4.x
