@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -21,7 +22,7 @@ const SettingsStack = createStackNavigator();
 //Declaration of each StackScreen whith their respectives names
 function HomeStackScreen(){
   return(
-    <HomeStack.Navigator>
+    <HomeStack.Navigator headerMode="none">
       <HomeStack.Screen
         name = "Home"
         component={HomeScreen}
@@ -55,7 +56,7 @@ function HomeStackScreen(){
 
 function StatisticsStackScreen(){
   return (
-    <StatisticsStack.Navigator>
+    <StatisticsStack.Navigator headerMode="none">
       <StatisticsStack.Screen
         name = "Statistics"
         component = {StatisticsScreen}
@@ -140,62 +141,47 @@ function FormularyScreen(){
 //Intended to be separated
 function MyTabs() {
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          if (route.name === 'Home') {
-            return (
-              <Ionicons
-                name={focused ? 'ios-home' : 'ios-home'
-                }
-                size={size}
-                color={color}
-              />
-            );
-          }
-          else if (route.name === 'Statistics'){
-            return (
-              <Ionicons
-                name={focused ? 'barshchart' : 'graphql'}
-                size={size}
-                color={color}
-              />
-            )
-          }
-          else if (route.name === 'Settings') {
-            return (
-              <Ionicons
-                name={focused ? 'ios-list-box' : 'ios-list'}
-                size={size}
-                color={color}
-              />
-            );
-          }
-        },
-      })}
-      tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-      }}
-    >
-      <Tab.Screen
-        name="Home"
-        component={HomeStackScreen}
-        options = {{
 
-        }}
-        />
-      <Tab.Screen name="Statistics" component={StatisticsStackScreen} />
-      <Tab.Screen name="Settings" component={SettingsStackScreen} />
-    </Tab.Navigator>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+
+              if (route.name === 'Home') {
+                iconName = focused ? 'home' : 'home-outline';
+              } else if (route.name === 'Settings') {
+                iconName = focused ? 'settings' : 'settings-outline';
+              } else if (route.name === 'Statistics') {
+                iconName = focused ? 'stats-chart-sharp' : 'stats-chart-outline'
+              }
+
+              // You can return any component that you like here!
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+          })}
+          tabBarOptions={{
+            activeTintColor: '#1979a9',
+            inactiveTintColor: 'gray',
+            labelStyle: {fontSize: 15, color: 'black'},
+            activeBackgroundColor: '#cce7e8',
+            inactiveBackgroundColor: 'white',
+            style: { position: 'absolute' }
+          }}
+        >
+          <Tab.Screen name="Home" component={HomeStackScreen} />
+          <Tab.Screen name="Statistics" component={StatisticsStackScreen} />
+          <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        </Tab.Navigator>
   );
 }
 
 //This is going to be like this in order to create a login screen
 export default function App() {
   return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <MyTabs />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

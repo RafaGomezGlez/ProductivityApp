@@ -10,7 +10,9 @@ export default class HomePageComponent extends React.Component{
     return (
       <View>
         <Text style = {styles.HomePageTitle}> Bienvenido </Text>
-        <ProgressChart/>
+        <View style = {styles.HomePageTitle}>
+          <ProgressChart/>
+        </View>
       </View>
     );
   }
