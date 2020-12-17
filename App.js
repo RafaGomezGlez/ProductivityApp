@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProgressChart from './components/ProgressCircle'
 import Constants from 'expo-constants'
 import HomePageComponent from './screens/HomePage'
+import FormularyPageComponent from './screens/FormularyPage'
 
 import { Ionicons, AntDesign } from '@expo/vector-icons'
 
@@ -132,8 +133,11 @@ function SettingsScreen(){
 //StackComponent for the button in HomePage
 function FormularyScreen(){
   return (
-    <View style = {{margin: 20, flex: 1, justifyContent: 'center', alignItems:'center'}}>
-      <Text> Formulary Beta </Text>
+    <View>
+      <FormularyPageComponent/>
+      <View style = {{margin: 20, flex: 1, justifyContent: 'center', alignItems:'center'}}>
+        <Text> Formulary Beta </Text>
+      </View>
     </View>
   );
 }
