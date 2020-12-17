@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native'
 import ProgressChart from '../components/ProgressCircle'
-import {styles} from '../styles/styles'
+import {styles} from '../styles/Styles'
 
 
 
