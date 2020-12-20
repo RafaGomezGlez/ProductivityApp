@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native'
 import ProgressChart from '../components/ProgressCircle'
-import {styles} from '../styles/styles'
+import {styles} from '../styles/Styles'
 
 
 
@@ -10,7 +10,9 @@ export default class HomePageComponent extends React.Component{
     return (
       <View>
         <Text style = {styles.HomePageTitle}> Bienvenido </Text>
-        <ProgressChart/>
+        <View style = {styles.HomePageTitle}>
+          <ProgressChart/>
+        </View>
       </View>
     );
   }

@@ -9,7 +9,10 @@ import ProgressChart from './components/ProgressCircle'
 import Constants from 'expo-constants'
 import HomePageComponent from './screens/HomePage'
 import FormularyPageComponent from './screens/FormularyPage'
+
 import SettingsPage from './screens/SettingsPage'
+
+
 
 import { Ionicons, AntDesign } from '@expo/vector-icons'
 
@@ -176,6 +179,7 @@ function MyTabs() {
           <Tab.Screen name="Home" component={HomeStackScreen} />
           <Tab.Screen name="Statistics" component={StatisticsStackScreen} />
           <Tab.Screen name="Settings" component={SettingsPage} />
+
         </Tab.Navigator>
   );
 }
