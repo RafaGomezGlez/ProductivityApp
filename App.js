@@ -9,10 +9,12 @@ import ProgressChart from './components/ProgressCircle'
 import Constants from 'expo-constants'
 import HomePageComponent from './screens/HomePage'
 import FormularyPageComponent from './screens/FormularyPage'
-
 import { Ionicons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import {styles} from './styles/HomeScreenStyle'
+import SettingsPage from './screens/SettingsPage'
+
+
 
 //Declaring the bottom tab navigator
 const Tab = createBottomTabNavigator();
@@ -190,7 +192,8 @@ function MyTabs() {
         >
           <Tab.Screen name="Home" component={HomeStackScreen} />
           <Tab.Screen name="Statistics" component={StatisticsStackScreen} />
-          <Tab.Screen name="Settings" component={SettingsStackScreen} />
+          <Tab.Screen name="Settings" component={SettingsPage} />
+
         </Tab.Navigator>
   );
 }
