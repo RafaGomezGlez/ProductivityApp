@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native'
+import {ScrollView, View, Text, StyleSheet, Button} from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -9,12 +9,12 @@ import ProgressChart from './components/ProgressCircle'
 import Constants from 'expo-constants'
 import HomePageComponent from './screens/HomePage'
 import FormularyPageComponent from './screens/FormularyPage'
+import { Ionicons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 
+import {styles} from './styles/HomeScreenStyle'
 import SettingsPage from './screens/SettingsPage'
 
 
-
-import { Ionicons, AntDesign } from '@expo/vector-icons'
 
 //Declaring the bottom tab navigator
 const Tab = createBottomTabNavigator();
@@ -103,7 +103,7 @@ function SettingsStackScreen(){
 //Components in our HomeScreen
 function HomeScreen({navigation}){
   return (
-    <View>
+    <ScrollView style = {{marginBottom: 75}}>
       <HomePageComponent/>
       <View style = {{margin: 50}}>
         <Button
@@ -111,7 +111,21 @@ function HomeScreen({navigation}){
           onPress = {() => navigation.navigate('Formulary')}
         />
       </View>
-    </View>
+      <View style={styles.containerTareas}>
+        <View style={styles.containerSquare}>
+          <View style={styles.logo}>
+            <Ionicons name="musical-notes" size={65} color='black' />
+          </View>
+          <View style={styles.columnaMitad}>
+            <Text style={styles.textMeta}> Tocar piano </Text>
+            <Text style={styles.textCantidad}> 12/100 </Text>
+          </View>
+        </View>
+
+          <View style={styles.containerSquare}>
+          </View>
+      </View>
+    </ScrollView>
   );
 }
 
