@@ -10,6 +10,10 @@ import Constants from 'expo-constants'
 import HomePageComponent from './screens/HomePage'
 import FormularyPageComponent from './screens/FormularyPage'
 
+import SettingsPage from './screens/SettingsPage'
+
+
+
 import { Ionicons, AntDesign } from '@expo/vector-icons'
 
 //Declaring the bottom tab navigator
@@ -174,7 +178,8 @@ function MyTabs() {
         >
           <Tab.Screen name="Home" component={HomeStackScreen} />
           <Tab.Screen name="Statistics" component={StatisticsStackScreen} />
-          <Tab.Screen name="Settings" component={SettingsStackScreen} />
+          <Tab.Screen name="Settings" component={SettingsPage} />
+
         </Tab.Navigator>
   );
 }
