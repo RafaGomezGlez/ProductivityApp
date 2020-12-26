@@ -1,21 +1,31 @@
 import React from 'react'
-import {StyleSheet, View} from 'react-native'
+import {StyleSheet, View, Dimensions} from 'react-native'
 import Constants from 'expo-constants'
+
+const width = Dimensions.get('window').width;
+const scale = 375;
+
+const scaling = (fontSize) => {
+  const ratio = fontSize / scale;
+  const newSize = Math.round(ratio * width);
+  return newSize;
+}
 
 const styles = StyleSheet.create({
   containerTareas: {
     alignItems: "center",
+    flex: 1,
+    marginBottom: "10%"
   },
   containerSquare: {
-    width: 380,
-    height: 150,
-    borderColor: "black",
+    width: "95%",
+    height: "32%",
     borderWidth: 8,
     justifyContent: "space-around",
     alignContent: "stretch",
     flexDirection: "row",
     borderRadius: 35,
-    marginBottom: 30,
+    marginBottom: "7%",
   },
   logo: {
     flex: 1,

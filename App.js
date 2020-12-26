@@ -4,16 +4,16 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import ProgressChart from './components/ProgressCircle'
 import Constants from 'expo-constants'
-import HomePageComponent from './screens/HomePage'
-import FormularyPageComponent from './screens/FormularyPage'
 import { Ionicons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 
-import {styles} from './styles/HomeScreenStyle'
+import ProgressChart from './components/ProgressCircle'
+import TasksHomePage from './components/TasksHomePage'
+import HomePageComponent from './screens/HomePage'
+import FormularyPageComponent from './screens/FormularyPage'
 import SettingsPage from './screens/SettingsPage'
 
+import {styles} from './styles/HomeScreenStyle'
 
 
 //Declaring the bottom tab navigator
@@ -102,6 +102,23 @@ function SettingsStackScreen(){
 
 //Components in our HomeScreen
 function HomeScreen({navigation}){
+  //The prims and tasks are only for testing
+  //prim is the default object and later you make deep copies
+  //Object.assign and insert them into an array
+  const prim = {
+    icon: "musical-notes",
+    meta: "tocar piano",
+    proporcion: "12/100",
+    color: "#6ef3d6",
+    key: 1,
+  }
+  const prim2 = Object.assign({}, prim)
+  prim2["key"] = 2
+  prim2["color"] = "#c6fce5"
+  const prim3 = Object.assign({}, prim)
+  prim3["key"] = 3
+  prim3["color"] ="#0dceda"
+  const tasks = [prim, prim2, prim3]
   return (
     <ScrollView style = {{marginBottom: 75}}>
       <HomePageComponent/>
@@ -112,18 +129,12 @@ function HomeScreen({navigation}){
         />
       </View>
       <View style={styles.containerTareas}>
-        <View style={styles.containerSquare}>
-          <View style={styles.logo}>
-            <Ionicons name="musical-notes" size={65} color='black' />
-          </View>
-          <View style={styles.columnaMitad}>
-            <Text style={styles.textMeta}> Tocar piano </Text>
-            <Text style={styles.textCantidad}> 12/100 </Text>
-          </View>
-        </View>
-
-          <View style={styles.containerSquare}>
-          </View>
+        {tasks.map(task => (
+            <TasksHomePage
+              key = {tasks.key}
+              task = {task}
+            />
+        ))}
       </View>
     </ScrollView>
   );
