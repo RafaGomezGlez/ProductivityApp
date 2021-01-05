@@ -15,14 +15,17 @@ export default class SettingsPage extends React.PureComponent{
 
           <StatusBar backgroundColor="white" barStyle={'dark-content'}/>
 
-          <View style = {[styles.title,styles.centerAlignment]}>
-            <Text style =  {styles.textTitle}> Configuración </Text>  
+          <View style = {styles.title}>
+            <Text style =  {styles.textTitle}> Ajustes</Text>  
           </View>
           
           {icons.map(icon => (
             <Setting info = {icon} />
           ))}
 
+          <View style = {[styles.logOut, styles.centerAlignment]} > 
+            <Text style = {styles.logOutText}> Cerrar sesión </Text>
+          </View>
 
         </ScrollView>
       </SafeAreaView>
