@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, StatusBar } from 'react-native';
 import Constants from 'expo-constants'
 
 const width = Dimensions.get('window').width
-const height = Dimensions.get('window').width
+const height = Dimensions.get('window').height
 
 export const styles = StyleSheet.create ({
   container: {
@@ -17,14 +17,13 @@ export const styles = StyleSheet.create ({
   title: {
     width:width*0.90,
     height: height*0.08, 
-    marginTop: StatusBar.currentHeight + 5,
-    alignItems: 'center',
+    marginTop: StatusBar.currentHeight,
   },
   optionContainer: {
     flex: 1,
     marginTop: 10,
     width: width,
-    height: height*0.2,
+    height: height*0.11,
   },
   option: {
     justifyContent: 'space-between',
@@ -33,12 +32,11 @@ export const styles = StyleSheet.create ({
     alignItems: 'center',
   },
   textOption: {
-    fontSize: 20,
+    fontSize: width*.075,
   },
   textTitle: {
-    fontSize:30,
+    fontSize:width*.13,
     fontWeight: 'bold',
-    textAlign: 'center',
   },
   separator: {
     height: 2,
@@ -46,5 +44,13 @@ export const styles = StyleSheet.create ({
     backgroundColor: "#CED0CE",
     alignSelf: 'center'
   },
-
+  logOut: {
+    marginTop: 10,
+    backgroundColor: 'yellow',
+    borderRadius: 30,
+    padding: 12
+  },
+  logOutText: {
+    fontSize: width*.07,
+  }
 })
