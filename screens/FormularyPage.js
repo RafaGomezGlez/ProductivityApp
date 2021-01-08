@@ -2,14 +2,15 @@ import React from 'react';
 import {View, Text} from 'react-native'
 import {styles} from '../styles/Styles'
 
-export default class FormularyPageComponent extends React.Component{
-
-  render(){
-    return(
-      <View>
-        <Text style={styles.HomePageTitle}> New Page </Text>
+function FormularyPage(){
+  return (
+    <View>
+      <FormularyPageComponent/>
+      <View style = {{margin: 20, flex: 1, justifyContent: 'center', alignItems:'center'}}>
+        <Text> Formulary Beta </Text>
       </View>
-
-    );
-  }
+    </View>
+  );
 }
+
+export default FormularyPage

@@ -5,20 +5,38 @@ import Icon2 from 'react-native-vector-icons/FontAwesome5';
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 
+const prim = {
+  icon: "musical-notes",
+  meta: "tocar piano",
+  proporcion: "12/100",
+  color: "#6ef3d6",
+  key: 1,
+}
+
+const prim2 = Object.assign({}, prim)
+prim2["key"] = 2
+prim2["color"] = "#c6fce5"
+
+const prim3 = Object.assign({}, prim)
+prim3["key"] = 3
+prim3["color"] ="#0dceda"
+
+const tasks = [prim, prim2, prim3]
+
 export default class SettingsPage extends React.PureComponent{
   render() {
     return(
       <SafeAreaView style = {styles.container} >
         <StatusBar backgroundColor="white" barStyle={'dark-content'}/>
         <View style = {[styles.title,styles.centerAlignment]}>
-          <Text style =  {styles.textTitle}> Configuración </Text>  
+          <Text style =  {styles.textTitle}> Configuración </Text>
         </View>
 
         <View style = {[styles.optionContainer,styles.centerAlignment]}>
-          <View style = {styles.option} > 
+          <View style = {styles.option} >
             <Icon name = "palette" color = "black" size = {40} />
             <Text style= {styles.textOption}> Tema </Text>
-            <Icon2 name = "chevron-right" color = "black" size = {30} />    
+            <Icon2 name = "chevron-right" color = "black" size = {30} />
           </View>
         </View>
 
@@ -26,39 +44,39 @@ export default class SettingsPage extends React.PureComponent{
 
         <View style = {[styles.optionContainer,styles.centerAlignment]}>
           <View style = {styles.option} >
-            <Icon name = "clock-time-five" color = "black" size = {40} /> 
+            <Icon name = "clock-time-five" color = "black" size = {40} />
             <Text style= {styles.textOption}> Hora límite </Text>
-            <Icon2 name = "chevron-right" color = "black" size = {30} />    
+            <Icon2 name = "chevron-right" color = "black" size = {30} />
           </View>
         </View>
 
         <View style = {styles.separator}/>
-    
+
         <View style = {[styles.optionContainer,styles.centerAlignment]}>
-          <View style = {styles.option} > 
-            <Icon name = "bell" color = "black" size = {40} />     
+          <View style = {styles.option} >
+            <Icon name = "bell" color = "black" size = {40} />
             <Text style= {styles.textOption}> Notificaciones </Text>
-            <Icon2 name = "chevron-right" color = "black" size = {30} />       
+            <Icon2 name = "chevron-right" color = "black" size = {30} />
           </View>
         </View>
 
         <View style = {styles.separator}/>
 
         <View style = {[styles.optionContainer,styles.centerAlignment]}>
-          <View style = {styles.option} > 
-            <Icon2 name = "user-friends" color = "black" size = {30} />   
-            <Text style= {styles.textOption}> Invita a un amigo </Text> 
-            <Icon2 name = "chevron-right" color = "black" size = {30} />    
+          <View style = {styles.option} >
+            <Icon2 name = "user-friends" color = "black" size = {30} />
+            <Text style= {styles.textOption}> Invita a un amigo </Text>
+            <Icon2 name = "chevron-right" color = "black" size = {30} />
           </View>
         </View>
 
         <View style = {styles.separator}/>
 
         <View style = {[styles.optionContainer,styles.centerAlignment]}>
-          <View style = {styles.option} > 
-            <Icon name = "star" color = "black" size = {30} />  
+          <View style = {styles.option} >
+            <Icon name = "star" color = "black" size = {30} />
             <Text style= {styles.textOption}> Califícanos </Text>
-            <Icon2 name = "chevron-right" color = "black" size = {30} />    
+            <Icon2 name = "chevron-right" color = "black" size = {30} />
           </View>
         </View>
       </SafeAreaView>
@@ -77,7 +95,7 @@ const styles = StyleSheet.create ({
   },
   title: {
     width:width*0.90,
-    height: height*0.08, 
+    height: height*0.08,
     marginTop: StatusBar.currentHeight + 5,
     alignItems: 'center',
   },
@@ -109,5 +127,3 @@ const styles = StyleSheet.create ({
   },
 
 })
-
-
