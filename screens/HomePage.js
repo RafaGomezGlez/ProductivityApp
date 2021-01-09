@@ -16,7 +16,7 @@ export default class HomePage extends React.Component{
         <View style = {{margin: 50}}>
           <Button
             title = "Press me"
-            onPress = {() => navigation.navigate('Formulary')}
+            onPress = {() => this.props.navigation.navigate('Formulary')}
           />
         </View>
         <View style={styles.containerTareas}>
