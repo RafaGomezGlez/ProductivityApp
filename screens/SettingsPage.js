@@ -12,9 +12,7 @@ export default class SettingsPage extends React.PureComponent{
     return(
       <SafeAreaView style = {styles.container} >
         <ScrollView> 
-
           <StatusBar backgroundColor="white" barStyle={'dark-content'}/>
-
           <View style = {styles.title}>
             <Text style =  {styles.textTitle}> Ajustes</Text>  
           </View>
@@ -27,10 +25,10 @@ export default class SettingsPage extends React.PureComponent{
             <Text style = {styles.logOutText}> Cerrar sesión </Text>
           </View>
 
+
         </ScrollView>
       </SafeAreaView>
     );
   }
 }
-
 
