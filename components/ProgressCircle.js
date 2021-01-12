@@ -28,14 +28,14 @@ export default class Chart extends React.Component{
     this.state = {
       barPercentage: 75,
       fill: "hola",
-      width: 30
+      width: 35
     }
   }
 
   render(){
     return (
       <AnimatedCircularProgress
-        size={screenWidth}
+        size={screenWidth-50}
         width={this.state.width}
         fill={this.state.barPercentage}
         tintColor="#0dceda"
@@ -43,7 +43,7 @@ export default class Chart extends React.Component{
           {
             (fill) => (
             <AnimatedCircularProgress
-              size={screenWidth-100}
+              size={screenWidth-150}
               width={this.state.width}
               fill={80}
               tintColor="#6ef3d6"
@@ -51,7 +51,7 @@ export default class Chart extends React.Component{
               {
                 (fill) => (
                   <AnimatedCircularProgress
-                    size={screenWidth-200}
+                    size={screenWidth-250}
                     width={this.state.width}
                     fill = {50}
                     tintColor={"#c6fce5"}

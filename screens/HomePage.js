@@ -1,31 +1,94 @@
 import React from 'react';
-import {View, Text, Button, ScrollView} from 'react-native'
+import {View, Text, Button, ScrollView, StatusBar} from 'react-native'
+import { Ionicons, AntDesign } from '@expo/vector-icons'
+
+import Carousel from 'react-native-snap-carousel';
 import ProgressChart from '../components/ProgressCircle'
 import TasksHomePage from '../components/TasksHomePage'
-import {styles} from '../styles/HomeScreenStyle'
+import CardTask from '../components/CardTask'
 
+import {styles, widthCards, heightScreen} from '../styles/HomeScreenStyle'
 
 export default class HomePage extends React.Component{
+  constructor(props){
+      super(props);
+      this.state = {
+        activeIndex: 0,
+        carouselItems: [
+        {
+            title:"Item 1",
+            text: "Text 1",
+            color: "#00A6FF",
+        },
+        {
+            title:"Item 2",
+            text: "Text 2",
+            color: "#00A6FF",
+
+        },
+        {
+            title:"Item 3",
+            text: "Text 3",
+            color: "#00A6FF",
+        },
+        {
+            title:"Item 4",
+            text: "Text 4",
+            color: "#00A6FF",
+        },
+        {
+            title:"Item 5",
+            text: "Text 5",
+            color: "#00A6FF",
+        },
+      ]
+    }
+  }
+
+  _renderItem({item,index}){
+      return ( <CardTask item={item} />)
+  }
+
   render(){
     return (
-      <ScrollView style = {{marginBottom: 50}}>
-        <Text style = {styles.HomePageTitle}> Bienvenido </Text>
-        <View style = {styles.HomePageTitle}>
-          <ProgressChart/>
+      <ScrollView style={styles.screenStyle}>
+      <StatusBar backgroundColor="white" barStyle={'dark-content'}/>
+        <View style={styles.topScreenStyle}>
+          <View style={styles.iconStyle}><AntDesign name="user" size={55}/></View>
+          <View style={styles.textTitleSection}>
+            <Text style={styles.title}>Good evening,</Text>
+            <Text style={styles.name}>Bryan!</Text>
+            <View style={styles.progressChartStyle}>
+              <ProgressChart/>
+            </View>
+          </View>
         </View>
-        <View style = {{margin: 50}}>
-          <Button
-            title = "Press me"
-            onPress = {() => this.props.navigation.navigate('Formulary')}
-          />
-        </View>
-        <View style={styles.containerTareas}>
-          {tasks.map(task => (
-              <TasksHomePage
-                key = {task.key}
-                task = {task}
-              />
-          ))}
+        <View style={styles.bottomScreenStyle}>
+          <View style={styles.textGoalsSection}>
+            <View style={styles.frameYourGoals}>
+              <Text style={styles.textYourGoals}>Your goals</Text>
+            </View>
+            <View style={styles.circle}>
+              <Text style={styles.textYourGoals}> 0 </Text>
+            </View>
+          </View>
+          <View style={styles.sectionCards}>
+          <View style={styles.cards}>
+            <Carousel
+              layout={"default"}
+              ref={ref => this.carousel = ref}
+              useScrollView = {true}
+              data={this.state.carouselItems}
+              sliderWidth={300}
+              itemWidth={widthCards}
+              renderItem={this._renderItem.bind(this)}
+              onSnapToItem = { index => this.setState({activeIndex:index}) }
+              inactiveSlideOpacity={1}
+              inactiveSlideScale={1}
+              enableSnap={false}
+               />
+          </View>
+          </View>
         </View>
       </ScrollView>
     );

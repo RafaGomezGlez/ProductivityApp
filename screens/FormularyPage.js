@@ -5,7 +5,6 @@ import {styles} from '../styles/Styles'
 function FormularyPage(){
   return (
     <View>
-      <FormularyPageComponent/>
       <View style = {{margin: 20, flex: 1, justifyContent: 'center', alignItems:'center'}}>
         <Text> Formulary Beta </Text>
       </View>
