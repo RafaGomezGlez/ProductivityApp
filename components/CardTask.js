@@ -1,19 +1,14 @@
 import React from 'react'
 import {View, TouchableOpacity, Text} from 'react-native'
 
+import styles from '../styles/cardTaskStyle'
+
 const CardTask = props => {
   return(
-  <TouchableOpacity onPress={props.changeColor}>
-    <View style={{
-      backgroundColor: props.item.color,
-      borderRadius: 10,
-      height: 250,
-      padding: 50,
-      marginLeft: 5,
-      marginRight: 5,
-      }}
+  <TouchableOpacity>
+    <View style= {[styles.card, {backgroundColor: props.item.color}]}
       >
-      <Text style={{fontSize: 30}}>{props.item.title}</Text>
+      <Text style={styles.text}>{props.item.title}</Text>
       <Text>{props.item.text}</Text>
     </View>
   </TouchableOpacity>

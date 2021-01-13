@@ -11,16 +11,17 @@ const HomeStack = createStackNavigator();
 //Declaration of each StackScreen whith their respectives names
 function HomeStackScreen(){
   return(
-    <HomeStack.Navigator headerMode="none">
+    <HomeStack.Navigator >
       <HomeStack.Screen
         name = "Home"
         component={HomePage}
         options = {{
+          headerShown: false,
           headerStyle:{
-            backgroundColor: '#2D4D73'
+            backgroundColor: '#2D4D73',
           },
           headerTintColor: '#fff',
-          headerTytleStyle: {
+          headerTitleStyle: {
             fontWeight: 'bold'
           },
 
@@ -30,13 +31,15 @@ function HomeStackScreen(){
         name = "Formulary"
         component={FormularyPage}
         options = {{
+          title: "Add task",
           headerStyle:{
-            backgroundColor: '#2D4D73'
+            backgroundColor: '#2D4D73',
+            height: 80,
           },
           headerTintColor: '#fff',
-          headerTytleStyle: {
-            fontWeight: 'bold'
-          }
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
     </HomeStack.Navigator>
