@@ -5,7 +5,7 @@ import styles from '../styles/cardTaskStyle'
 
 const CardTask = props => {
   return(
-  <TouchableOpacity>
+  <TouchableOpacity onPress={props.navigateCardTask}>
     <View style= {[styles.card, {backgroundColor: props.item.color}]}
       >
       <Text style={styles.text}>{props.item.title}</Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Button, ScrollView, StatusBar} from 'react-native'
+import {Alert, View, Text, Button, ScrollView, StatusBar} from 'react-native'
 import { Ionicons, AntDesign } from '@expo/vector-icons'
 
 import Carousel from 'react-native-snap-carousel';
@@ -8,7 +8,7 @@ import TasksHomePage from '../components/TasksHomePage'
 import CardTask from '../components/CardTask'
 import AddCardTask from '../components/AddCardTask'
 
-import {styles, widthCards, heightScreen} from '../styles/HomeScreenStyle'
+import {styles, widthCards, heightScreen, widthScreen} from '../styles/HomeScreenStyle'
 
 export default class HomePage extends React.Component{
   constructor(props){
@@ -35,13 +35,43 @@ export default class HomePage extends React.Component{
       color: "#00A6FF",
     }
     this.setState({
-      carouselItems: [...this.state.carouselItems, newItem]
+      carouselItems: [newItem, ...this.state.carouselItems]
     })
+  }
+
+  removeTask = (title) => {
+    Alert.alert(
+    "Delete", `Do you want to delete ${title}?`,
+    [
+      {
+        text: "Yes",
+        onPress: () => {
+          this.setState({
+            carouselItems: this.state.carouselItems.filter(carousel =>
+              carousel.title !== title
+            )
+          })
+          this.carousel.triggerRenderingHack()
+          this.props.navigation.goBack()
+        }
+      },
+      {
+        text: "Cancel",
+      }
+      ],
+    );
   }
 
   _navigateFormulary = () => {
     this.props.navigation.navigate('Formulary', {
       addTask: this.addNewTask,
+    })
+  }
+
+  _navigateCardTask = (title) => {
+    this.props.navigation.navigate('TaskPage', {
+      removeTask: this.removeTask,
+      nameTitle: title,
     })
   }
 
@@ -51,7 +81,10 @@ export default class HomePage extends React.Component{
           <AddCardTask item={item}
           navigateFormulary={() => this._navigateFormulary()}
           />)
-      return  ( <CardTask item={item} />)
+      return  (
+        <CardTask item={item}
+        navigateCardTask={() => this._navigateCardTask(item.title)}
+        />)
   }
 
   render(){
@@ -92,7 +125,7 @@ export default class HomePage extends React.Component{
               inactiveSlideOpacity={1}
               inactiveSlideScale={1}
               enableSnap={false}
-               />
+              />
           </View>
           </View>
         </View>

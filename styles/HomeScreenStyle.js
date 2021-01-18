@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export {styles, widthCards, heightScreen}
+export {styles, widthCards, heightScreen, widthScreen}

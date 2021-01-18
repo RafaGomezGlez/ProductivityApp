@@ -1,10 +1,12 @@
 import React from 'react';
-import {} from  'react-native'
+import {View, TouchableOpacity} from  'react-native'
+import { Ionicons, AntDesign } from '@expo/vector-icons'
 
 import { createStackNavigator } from '@react-navigation/stack';
 
 import HomePage from '../screens/HomePage'
 import FormularyPage from '../screens/FormularyPage'
+import TaskPage from '../screens/TaskPage'
 
 const HomeStack = createStackNavigator();
 
@@ -17,14 +19,6 @@ function HomeStackScreen(){
         component={HomePage}
         options = {{
           headerShown: false,
-          headerStyle:{
-            backgroundColor: '#2D4D73',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold'
-          },
-
         }}
       />
       <HomeStack.Screen
@@ -33,14 +27,39 @@ function HomeStackScreen(){
         options = {{
           title: "Add task",
           headerStyle:{
-            backgroundColor: '#2D4D73',
-            height: 80,
+            backgroundColor: '#1389CE',
+            height: 60,
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
             fontWeight: 'bold',
           },
         }}
+      />
+      <HomeStack.Screen
+        name = "TaskPage"
+        component={TaskPage}
+        options = { ({route, navigation}) => ({
+          headerStyle:{
+            backgroundColor: '#1389CE',
+            height: 60,
+          },
+          headerRight: () => (
+            <View>
+              <TouchableOpacity style={{marginRight: 20}} onPress={() =>
+                route.params.removeTask(route.params.nameTitle)
+              }>
+                <Ionicons name="trash-outline" size={45} />
+              </TouchableOpacity>
+            </View>
+          ),
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignSelf: 'center',
+          },
+          title: route.params.nameTitle
+        })}
       />
     </HomeStack.Navigator>
   );
