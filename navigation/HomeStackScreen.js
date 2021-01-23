@@ -47,7 +47,7 @@ function HomeStackScreen(){
           headerRight: () => (
             <View>
               <TouchableOpacity style={{marginRight: 20}} onPress={() =>
-                route.params.removeTask(route.params.nameTitle)
+                route.params.removeTask(route.params.item.title)
               }>
                 <Ionicons name="trash-outline" size={45} />
               </TouchableOpacity>
@@ -58,7 +58,7 @@ function HomeStackScreen(){
             fontWeight: 'bold',
             alignSelf: 'center',
           },
-          title: route.params.nameTitle
+          title: route.params.item.title
         })}
       />
     </HomeStack.Navigator>

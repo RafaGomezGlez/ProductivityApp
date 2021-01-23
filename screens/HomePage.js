@@ -30,8 +30,11 @@ export default class HomePage extends React.Component{
   addNewTask = (task) => {
     let newItem = {
       type: "task",
-      title: task,
-      text: "Text",
+      title: task.name,
+      category: task.category,
+      repetition: task.repetition,
+      days: task.days,
+      text: task.category + " " + task.repetition + " " + task.days,
       color: "#00A6FF",
     }
     this.setState({
@@ -68,10 +71,10 @@ export default class HomePage extends React.Component{
     })
   }
 
-  _navigateCardTask = (title) => {
+  _navigateCardTask = (item) => {
     this.props.navigation.navigate('TaskPage', {
       removeTask: this.removeTask,
-      nameTitle: title,
+      item: item,
     })
   }
 
@@ -83,14 +86,14 @@ export default class HomePage extends React.Component{
           />)
       return  (
         <CardTask item={item}
-        navigateCardTask={() => this._navigateCardTask(item.title)}
+        navigateCardTask={() => this._navigateCardTask(item)}
         />)
   }
 
   render(){
     return (
       <ScrollView style={styles.screenStyle}>
-      <StatusBar backgroundColor="#1389CE" barStyle={'dark-content'}/>
+      <StatusBar backgroundColor="#017AC1" barStyle={'dark-content'}/>
         <View style={styles.topScreenStyle}>
           <View style={styles.iconStyle}><AntDesign name="user" size={55}/></View>
           <View style={styles.textTitleSection}>
