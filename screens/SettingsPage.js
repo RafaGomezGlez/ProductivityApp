@@ -3,6 +3,7 @@ import {View, Text, SafeAreaView, StyleSheet, StatusBar, Dimensions, ScrollView,
 import Setting from '../components/Setting'
 import {styles} from '../styles/SettingsStyles'
 import {icons} from '../data/iconsData'
+import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
 
 
 export default class SettingsPage extends React.PureComponent{
@@ -12,7 +13,7 @@ export default class SettingsPage extends React.PureComponent{
     return(
       <SafeAreaView style = {styles.container} >
         <ScrollView> 
-          <StatusBar backgroundColor="white" barStyle={'dark-content'}/>
+          <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#1389CE"/>
           <View style = {styles.title}>
             <Text style =  {styles.textTitle}> Ajustes</Text>  
           </View>
