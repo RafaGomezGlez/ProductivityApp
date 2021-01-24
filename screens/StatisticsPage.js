@@ -16,6 +16,7 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 import Graph from '../components/IndividualGraph';
 import {someData} from '../data/Goals'
+import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -110,6 +111,7 @@ class StatisticsPage extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
+        <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="white"/>
         <View style={styles.headerContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Statistics</Text>
