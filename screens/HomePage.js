@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Button, ScrollView, StatusBar} from 'react-native'
+import {Alert, View, Text, Button, ScrollView, StatusBar} from 'react-native'
 import { Ionicons, AntDesign } from '@expo/vector-icons'
 
 import Carousel from 'react-native-snap-carousel';
@@ -7,9 +7,8 @@ import ProgressChart from '../components/ProgressCircle'
 import TasksHomePage from '../components/TasksHomePage'
 import CardTask from '../components/CardTask'
 import AddCardTask from '../components/AddCardTask'
-import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
 
-import {styles, widthCards, heightScreen} from '../styles/HomeScreenStyle'
+import {styles, widthCards, heightScreen, widthScreen} from '../styles/HomeScreenStyle'
 
 export default class HomePage extends React.Component{
   constructor(props){
@@ -31,18 +30,51 @@ export default class HomePage extends React.Component{
   addNewTask = (task) => {
     let newItem = {
       type: "task",
-      title: task,
-      text: "Text",
+      title: task.name,
+      category: task.category,
+      repetition: task.repetition,
+      days: task.days,
+      text: task.category + " " + task.repetition + " " + task.days,
       color: "#00A6FF",
     }
     this.setState({
-      carouselItems: [...this.state.carouselItems, newItem]
+      carouselItems: [newItem, ...this.state.carouselItems]
     })
+  }
+
+  removeTask = (title) => {
+    Alert.alert(
+    "Delete", `Do you want to delete ${title}?`,
+    [
+      {
+        text: "Yes",
+        onPress: () => {
+          this.setState({
+            carouselItems: this.state.carouselItems.filter(carousel =>
+              carousel.title !== title
+            )
+          })
+          this.carousel.triggerRenderingHack()
+          this.props.navigation.goBack()
+        }
+      },
+      {
+        text: "Cancel",
+      }
+      ],
+    );
   }
 
   _navigateFormulary = () => {
     this.props.navigation.navigate('Formulary', {
       addTask: this.addNewTask,
+    })
+  }
+
+  _navigateCardTask = (item) => {
+    this.props.navigation.navigate('TaskPage', {
+      removeTask: this.removeTask,
+      item: item,
     })
   }
 
@@ -52,13 +84,16 @@ export default class HomePage extends React.Component{
           <AddCardTask item={item}
           navigateFormulary={() => this._navigateFormulary()}
           />)
-      return  ( <CardTask item={item} />)
+      return  (
+        <CardTask item={item}
+        navigateCardTask={() => this._navigateCardTask(item)}
+        />)
   }
 
   render(){
     return (
       <ScrollView style={styles.screenStyle}>
-      <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#1389CE"/>
+      <StatusBar backgroundColor="#017AC1" barStyle={'dark-content'}/>
         <View style={styles.topScreenStyle}>
           <View style={styles.iconStyle}><AntDesign name="user" size={55}/></View>
           <View style={styles.textTitleSection}>
@@ -93,7 +128,7 @@ export default class HomePage extends React.Component{
               inactiveSlideOpacity={1}
               inactiveSlideScale={1}
               enableSnap={false}
-               />
+              />
           </View>
           </View>
         </View>

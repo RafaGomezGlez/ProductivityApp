@@ -33,11 +33,13 @@ function MainTabNavigator() {
             },
           })}
           tabBarOptions={{
+            initialRouteName: "Home",
             activeTintColor: '#1979a9',
             inactiveTintColor: 'gray',
-            labelStyle: {fontSize: 15, color: 'black'},
-            activeBackgroundColor: '#cce7e8',
+            labelStyle: {fontSize: 15},
             inactiveBackgroundColor: 'white',
+            style: { position: 'absolute', height: 55 }
+
           }}
         >
           <Tab.Screen name="Home" component={HomeStackScreen} />
