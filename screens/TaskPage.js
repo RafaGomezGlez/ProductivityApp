@@ -7,7 +7,7 @@ export default class TaskPage extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-
+      item: this.props.route.params.item
     }
   }
 
@@ -16,12 +16,12 @@ export default class TaskPage extends React.Component{
     return(
       <View style={{alignItems: "center", backgroundColor: "#FFFF", flex: 1}}>
         <Text> Task Page Beta</Text>
-        <Text> {this.props.route.params.item.category} </Text>
-        <Text> {this.props.route.params.item.repetition} </Text>
+        <Text> {this.state.item.category} </Text>
+        <Text> {this.state.item.repetition} </Text>
         <View>
         {
-          this.props.route.params.item.repetition === 'day' ?
-          this.props.route.params.item.days.map(day =>
+          this.state.item.repetition === 'day' ?
+          this.state.item.days.map(day =>
           <Text> {day} </Text>
         ) : null
         }

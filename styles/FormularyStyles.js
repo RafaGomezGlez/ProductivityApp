@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   scrollViewStyle: {
     marginTop: "5%",
     marginLeft: "5%",
-    marginBottom: "18%",
+    marginBottom: "7%",
     height: heightScreen * .7,
   },
   textTitle: {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: heightScreen * .05,
-    width: widthScreen * .87,
+    width: widthScreen * .70,
     justifyContent: 'center',
     marginTop: '2%',
     marginBottom: '2%',
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   rowChips: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingHorizontal: 6,
+    paddingHorizontal: '1%',
     marginRight: "8%",
     marginTop: '1.8%',
     marginBottom: '1.8%',
@@ -62,6 +62,9 @@ const styles = StyleSheet.create({
     marginTop: '1.8%',
     marginBottom: '1.%',
   },
+  cuantificacionViewStyle: {
+    marginRight: "8%",
+  },
   habitsIconsView: {
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -69,10 +72,14 @@ const styles = StyleSheet.create({
     marginRight: "8%",
     marginTop: '1.8%',
     marginBottom: '1.8%',
+    width: widthScreen * .87,
   },
   iconStyle: {
     alignItems: 'center',
-    marginRight: "8%",
+    marginRight: "4%",
+    marginLeft: "4%",
+    width: "25%",
+    backgroundColor: 'white',
   },
   textIconStyle: {
     fontSize: 22,
@@ -109,8 +116,9 @@ const styles = StyleSheet.create({
   },
   buttonViewStyle: {
     marginRight: "8%",
-    marginTop: "29%", //******
-    height: '10%'
+    height: '10%',
+    marginBottom: '10%',
+    marginLeft: "5%",
   },
 })
 

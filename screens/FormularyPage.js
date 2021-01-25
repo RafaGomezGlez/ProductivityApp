@@ -1,11 +1,9 @@
 import React from 'react';
-import {View, ScrollView, TouchableOpacity, Switch, Text, Button, TextInput} from 'react-native'
+import { Alert, View, ScrollView, TouchableOpacity, Switch, Text, Button, TextInput } from 'react-native'
 import { Chip } from 'react-native-paper';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import styles from '../styles/FormularyStyles'
-
-
 
 class FormularyPage extends React.Component{
   constructor(props){
@@ -20,10 +18,14 @@ class FormularyPage extends React.Component{
         { key: 'Fantasy', status: false },
         { key: 'Well-being', status: false },
       ],
+      elemCuantification: [
+        { key: 'time', status: false },
+        { key: 'repeat', status: false },
+      ],
       elemRepetition: [
         { key: 'day', status: false },
         { key: 'week', status: false },
-        { key: 'month', status: false}
+        { key: 'month', status: false},
       ],
       days: [
         { key:'D', status: false },
@@ -68,14 +70,35 @@ class FormularyPage extends React.Component{
 
   //func when you click the button
   addTask = () => {
+    try{
+      var name = this.state.task
+      if(name.length === 0) throw "No pusiste un nombre"
+      var category = this.state.elemChips.find(elem => elem.status === true)
+      if(category === undefined) throw "No escogiste categoría"
+      category = category.key
+      var repetition = this.state.elemRepetition.find(elem => elem.status === true)
+      if(repetition === undefined) throw "No escogiste cuanto vas a repetir tu hábito"
+      repetition = repetition.key
+      if(repetition === 'day'){
+        var days =  this.state.days.flatMap(elem => elem.status === true ? [elem.key] : [])
+        console.log(days)
+        if(days.length === 0) throw "No escogiste ningun día"
+      }
+    } catch(err) {
+      Alert.alert(
+        "Error!",
+        `${err}`
+      )
+      return
+    }
     const task = {
-      name: this.state.task,
-      category: this.state.elemChips.find(elem => elem.status === true).key,
-      repetition: this.state.elemRepetition.find(elem => elem.status === true).key,
+      name: name,
+      category: category,
+      repetition: repetition,
     }
     if(task.repetition === 'day')
-      task.days = this.state.days.flatMap(elem => elem.status === true ? [elem.key] : [])
-    console.log(task)
+      task.days = days
+
     this.props.route.params.addTask(task)
     this.props.navigation.goBack()
   }
@@ -86,21 +109,16 @@ class FormularyPage extends React.Component{
         <ScrollView style={styles.scrollViewStyle} >
             <View>
 
-              <View>
-                <Text style={styles.textTitle}>Name</Text>
-              </View>
               <View style = {styles.input}>
                   <TextInput
-                  placeholder="Body Text"
+                  placeholder="Nombre de tu meta"
                   onChangeText={this.changeTask}
                   value={this.state.task}
                   style = {styles.textInput}
                   />
               </View>
 
-              <View>
-                <Text style={styles.textTitle}>Categoría</Text>
-              </View>
+
               <View style={styles.rowChips}>
                 {this.state.elemChips.map(elemChip =>
                   <Chip
@@ -116,21 +134,50 @@ class FormularyPage extends React.Component{
               </View>
 
               <View style={styles.cuantificacionStyle}>
-                <Text style={styles.textTitle}>Cuantificación</Text>
+                <Text style={styles.textTitle}>Cuantificación: </Text>
                 <Switch
                 onValueChange={this.changeSwitch}
                 value={this.state.switchEnabled}
                 />
               </View>
 
+
               {this.state.switchEnabled ?
-                 <View style={{height: 250, backgroundColor: 'grey', marginRight: "8%"}}>
+                <View style={styles.cuantificacionViewStyle}>
+                 <Text> ¿Cómo vas a cuantificar? </Text>
+                 <View style={styles.habitsIconsView}>
+                  <TouchableOpacity style={styles.iconStyle} onPress={() => this.changeObj('elemCuantification', 'time')}>
+                    <MaterialCommunityIcons
+                    name={this.state.elemCuantification[0].status ? "clock-time-eight-outline" : "clock-time-eight"}
+                    color={this.state.elemCuantification[0].status ? '#1389CE' : 'black'}
+                    size={65}
+                    />
+                    <Text> Tiempo </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.iconStyle} onPress={() => this.changeObj('elemCuantification', 'repeat')}>
+                    <MaterialCommunityIcons
+                    name={"repeat"}
+                    size={65}
+                    color={this.state.elemCuantification[1].status ? '#1389CE' : 'black'}/>
+                    <Text> Veces </Text>
+                  </TouchableOpacity>
+                 </View>
+                 {this.state.elemCuantification[0].status ?
+                   <View>
+                    <Text> Tiempo </Text>
+                   </View>
+                   : null}
+                 {this.state.elemCuantification[1].status ?
+                   <View>
+                    <Text> Repeticion </Text>
+                   </View>
+                   : null}
                 </View>
                  : null
               }
 
               <View>
-                <Text style={styles.textTitle}>Repetición del hábito</Text>
+                <Text style={styles.textTitle}>Repetición del hábito: </Text>
               </View>
               <View style={styles.habitsIconsView}>
                 <TouchableOpacity style={styles.iconStyle} onPress={() => this.changeObj('elemRepetition', 'day')}>
@@ -165,13 +212,11 @@ class FormularyPage extends React.Component{
                 )}
               </View> : null
               }
-
-            <View style={styles.buttonViewStyle}>
-              <Button title="Create task" onPress={this.addTask}/>
-            </View>
-
           </View>
         </ScrollView>
+        <View style={styles.buttonViewStyle}>
+          <Button title="Create task" onPress={this.addTask}/>
+        </View>
       </View>
     );
   }
