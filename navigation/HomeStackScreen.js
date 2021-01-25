@@ -27,6 +27,7 @@ function HomeStackScreen(){
         options = {{
           title: "Add task",
           headerStyle:{
+
             backgroundColor: '#1389CE',
             height: 60,
           },

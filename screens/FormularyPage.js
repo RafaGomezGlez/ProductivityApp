@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Alert, View, ScrollView, TouchableOpacity, Switch, Text, Button, TextInput } from 'react-native'
 import { Chip } from 'react-native-paper';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -221,6 +222,5 @@ class FormularyPage extends React.Component{
     );
   }
 }
-
 
 export default FormularyPage
