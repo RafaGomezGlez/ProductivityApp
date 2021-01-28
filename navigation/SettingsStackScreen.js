@@ -15,13 +15,7 @@ function SettingsStackScreen(){
         name = "Settings"
         component = {SettingsPage}
         options = {{
-          headerStyle:{
-            backgroundColor: '#2D4D73'
-          },
-          headerTintColor: '#fff',
-          headerTytleStyle: {
-            fontWeight: 'bold'
-          }
+          headerShown: false,
         }}
       />
     </SettingsStack.Navigator>

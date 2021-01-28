@@ -4,6 +4,8 @@ import { Alert, View, ScrollView, TouchableOpacity, Switch, Text, Button, TextIn
 import { Chip } from 'react-native-paper';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
+import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
+
 import styles from '../styles/FormularyStyles'
 
 class FormularyPage extends React.Component{
@@ -12,12 +14,20 @@ class FormularyPage extends React.Component{
     this.state = {
       task: '',
       switchEnabled: false,
+      buttonDisabled: false,
       elemChips: [
-        { key: 'Adventure', status: false },
-        { key: 'Trying', status: false },
-        { key: 'Family', status: false },
-        { key: 'Fantasy', status: false },
-        { key: 'Well-being', status: false },
+        { key: 'Trabajo', mainColor: "#1365CF",
+        brighterColor: "#9DB8DD", darkerColor: "#0154C1",  status: false },
+        { key: 'Deportes', mainColor: "#BC0701",
+        brighterColor: "#D18885", darkerColor: "#9D0601",  status: false },
+        { key: 'Salud', mainColor: "#29BC01",
+        brighterColor: "#72EC51", darkerColor: "#239D01",  status: false },
+        { key: 'Cultura', mainColor: "#CE6213",
+        brighterColor: "#FCB27E", darkerColor: "#C15101", status: false },
+        { key: 'Finanzas', mainColor: "#01AED5",
+        brighterColor: "#70E5FF", darkerColor: "#0096B8",  status: false },
+        { key: 'Higiene', mainColor: "#CE1365",
+        brighterColor: "#E080AA", darkerColor: "#C10154",  status: false },
       ],
       elemCuantification: [
         { key: 'time', status: false },
@@ -40,12 +50,23 @@ class FormularyPage extends React.Component{
     }
   }
 
-  //For changing elemRepetition & elemChips
+  //For changing elemCuantification & elemRepetition
   changeObj = (obj, cat) => {
     this.setState({
       [obj]: this.state.[obj].map(elem => {
         if(elem.key !== cat) return { key: elem.key, status: false }
         return { key: elem.key, status: !elem.status }
+      })
+    })
+  }
+
+  changeChips = (cat) => {
+    this.setState({
+      elemChips: this.state.elemChips.map(elem => {
+        if(elem.key !== cat) return { key: elem.key, mainColor: elem.mainColor,
+          brighterColor: elem.brighterColor, darkerColor: elem.darkerColor, status: false }
+        return { key: elem.key, mainColor: elem.mainColor,
+          brighterColor: elem.brighterColor, darkerColor: elem.darkerColor, status: !elem.status }
       })
     })
   }
@@ -71,18 +92,30 @@ class FormularyPage extends React.Component{
 
   //func when you click the button
   addTask = () => {
+    this.setState({
+      buttonDisabled: true,
+    })
+    let mounted = true
+
+    setTimeout(()=>{
+      if(mounted){this.setState({buttonDisabled: false})}}
+      , 500)
+
+
     try{
       var name = this.state.task
       if(name.length === 0) throw "No pusiste un nombre"
-      var category = this.state.elemChips.find(elem => elem.status === true)
-      if(category === undefined) throw "No escogiste categoría"
-      category = category.key
+      var label = this.state.elemChips.find(elem => elem.status === true)
+      if(label === undefined) throw "No escogiste categoría"
+      var category = label.key
+      var mainColor = label.mainColor
+      var brighterColor = label.brighterColor
+      var darkerColor = label.darkerColor
       var repetition = this.state.elemRepetition.find(elem => elem.status === true)
       if(repetition === undefined) throw "No escogiste cuanto vas a repetir tu hábito"
       repetition = repetition.key
       if(repetition === 'day'){
         var days =  this.state.days.flatMap(elem => elem.status === true ? [elem.key] : [])
-        console.log(days)
         if(days.length === 0) throw "No escogiste ningun día"
       }
     } catch(err) {
@@ -95,11 +128,16 @@ class FormularyPage extends React.Component{
     const task = {
       name: name,
       category: category,
+      mainColor: mainColor,
+      brighterColor: brighterColor,
+      darkerColor: darkerColor,
       repetition: repetition,
     }
     if(task.repetition === 'day')
       task.days = days
 
+    //console.log(task)
+    mounted = false
     this.props.route.params.addTask(task)
     this.props.navigation.goBack()
   }
@@ -107,6 +145,7 @@ class FormularyPage extends React.Component{
   render(){
     return (
       <View style={styles.screenStyle}>
+      <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#017AC1"/>
         <ScrollView style={styles.scrollViewStyle} >
             <View>
 
@@ -124,10 +163,10 @@ class FormularyPage extends React.Component{
                 {this.state.elemChips.map(elemChip =>
                   <Chip
                   key = {elemChip.key}
-                  style={[styles.chipStyle, elemChip.status ? styles.activeChipStyle : styles.inactiveChipStyle]}
-                  onPress={() => this.changeObj('elemChips',elemChip.key)}>
+                  style={[styles.chipStyle, elemChip.status ? {backgroundColor: elemChip.mainColor} : styles.inactiveChipStyle]}
+                  onPress={() => this.changeChips(elemChip.key)}>
                     <Text
-                    style={[styles.textChipStyle, elemChip.status ? styles.activeChipStyle : styles.inactiveChipStyle]}>
+                    style={[styles.textChipStyle, elemChip.status ? {backgroundColor: elemChip.mainColor, color: 'white'} : styles.inactiveChipStyle]}>
                     {elemChip.key}
                     </Text>
                   </Chip>
@@ -194,7 +233,7 @@ class FormularyPage extends React.Component{
                 <TouchableOpacity style={styles.iconStyle} onPress={() => this.changeObj('elemRepetition', 'month')}>
                   <MaterialCommunityIcons name={'calendar-month'} size={75}
                   color={this.state.elemRepetition[2].status ? '#1389CE' : 'black'}/>
-                  <Text style={styles.textIconStyle}>Año</Text>
+                  <Text style={styles.textIconStyle}>Mes</Text>
                 </TouchableOpacity>
               </View>
 
@@ -214,10 +253,10 @@ class FormularyPage extends React.Component{
               </View> : null
               }
           </View>
+          <View style={styles.buttonViewStyle}>
+            <Button title="Create task" onPress={this.addTask} disabled={this.state.buttonDisabled}/>
+          </View>
         </ScrollView>
-        <View style={styles.buttonViewStyle}>
-          <Button title="Create task" onPress={this.addTask}/>
-        </View>
       </View>
     );
   }

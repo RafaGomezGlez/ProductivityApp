@@ -12,17 +12,17 @@ export default class SettingsPage extends React.PureComponent{
   render() {
     return(
       <SafeAreaView style = {styles.container} >
-        <ScrollView> 
-          <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#1389CE"/>
+        <ScrollView>
+          <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="white"/>
           <View style = {styles.title}>
-            <Text style =  {styles.textTitle}> Ajustes</Text>  
+            <Text style =  {styles.textTitle}> Ajustes</Text>
           </View>
-          
+
           {icons.map(icon => (
             <Setting info = {icon} />
           ))}
 
-          <View style = {[styles.logOut, styles.centerAlignment]} > 
+          <View style = {[styles.logOut, styles.centerAlignment]} >
             <Text style = {styles.logOutText}> Cerrar sesión </Text>
           </View>
 
@@ -32,4 +32,3 @@ export default class SettingsPage extends React.PureComponent{
     );
   }
 }
-

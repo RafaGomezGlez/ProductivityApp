@@ -29,7 +29,7 @@ function HomeStackScreen(){
           headerStyle:{
 
             backgroundColor: '#1389CE',
-            height: 60,
+            height: 80,
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
@@ -42,8 +42,8 @@ function HomeStackScreen(){
         component={TaskPage}
         options = { ({route, navigation}) => ({
           headerStyle:{
-            backgroundColor: '#1389CE',
-            height: 60,
+            backgroundColor: route.params.mainColor,
+            height: 80,
           },
           headerRight: () => (
             <View>

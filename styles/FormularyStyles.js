@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
   scrollViewStyle: {
     marginTop: "5%",
     marginLeft: "5%",
-    marginBottom: "7%",
     height: heightScreen * .7,
   },
   textTitle: {
