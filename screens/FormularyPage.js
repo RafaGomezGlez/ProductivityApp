@@ -5,6 +5,7 @@ import { Chip } from 'react-native-paper';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
+import ModalView from '../components/ModalView'
 
 import styles from '../styles/FormularyStyles'
 
@@ -145,6 +146,7 @@ class FormularyPage extends React.Component{
   render(){
     return (
       <View style={styles.screenStyle}>
+      <ModalView />
       <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#017AC1"/>
         <ScrollView style={styles.scrollViewStyle} >
             <View>
