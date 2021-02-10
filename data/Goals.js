@@ -1,4 +1,4 @@
-export const someData = [
+export const generalData = [
   {
     title: 'General',
     days: [
