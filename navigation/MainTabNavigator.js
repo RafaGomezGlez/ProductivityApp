@@ -37,8 +37,7 @@ function MainTabNavigator() {
             activeTintColor: '#1979a9',
             inactiveTintColor: 'gray',
             labelStyle: {fontSize: 15},
-            inactiveBackgroundColor: 'white',
-            style: {height: 55 }
+            inactiveBackgroundColor: 'white'
 
           }}
         >
