@@ -4,26 +4,36 @@ import Setting from '../components/Setting'
 import {styles} from '../styles/SettingsStyles'
 import {icons} from '../data/iconsData'
 import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
+import fb from '../firebase/firebase'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { 
+  getUser
+} from '../actions/user'
 
-
-export default class SettingsPage extends React.PureComponent{
-
-
+class SettingsPage extends React.PureComponent{
+  
+  logOut = () => {
+    fb.auth().signOut().then(
+      this.props.getUser('null')
+    )
+  }
+ 
   render() {
     return(
       <SafeAreaView style = {styles.container} >
         <ScrollView> 
-          <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#1389CE"/>
-          <View style = {styles.title}>
-            <Text style =  {styles.textTitle}> Ajustes</Text>  
-          </View>
+          <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#DADADA"/>
           
-          {icons.map(icon => (
+          {icons.map((icon,index) => (
             <Setting info = {icon} />
           ))}
 
           <View style = {[styles.logOut, styles.centerAlignment]} > 
-            <Text style = {styles.logOutText}> Cerrar sesión </Text>
+            <TouchableOpacity onPress={this.logOut} >
+              <Text style = {styles.logOutText}> Cerrar sesión </Text>
+            </TouchableOpacity>
+            
           </View>
 
 
@@ -32,4 +42,19 @@ export default class SettingsPage extends React.PureComponent{
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators({ getUser }, dispatch)
+}
+
+const mapStateToProps = state => {
+	return {
+		user: state.user
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(SettingsPage)
 

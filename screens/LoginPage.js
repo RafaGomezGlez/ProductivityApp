@@ -10,10 +10,20 @@ import {
     TouchableOpacity ,
 } from 'react-native';
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Overlay } from 'react-native-elements';
 import fb from '../firebase/firebase'
+import { 
+    updateEmail, 
+    updatePassword, 
+    login,
+    loginAnon,
+    getUser,
+} from '../actions/user'
 
 const image = { uri: 'https://www.hiltonaffiliates.com/assets/img/Canopy/canopy-city-view-1680x758.jpg' };
 
@@ -29,27 +39,20 @@ class LoginScreen extends React.Component {
         }
     }
 
+    componentDidMount() {
+		  fb.auth().onAuthStateChanged(user => {
+			  if (user) {
+          this.props.getUser(user.uid)
+			  }
+		})
+    }
+
     logInMail = () => {
-      fb.auth()
-        .signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(() => {
-          alert("todo cool")
-        })
-        .catch((error) => {
-          alert(error.message)
-        })
+      this.props.login()
     }
 
     logInAnon = () => {
-      fb.auth().signInAnonymously()
-        .then(() => 
-          this.props.navigation.navigate("Home")
-        )
-      .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          alert(errorMessage)
-      })
+      this.props.loginAnon()
     }
 
     render() {
@@ -75,8 +78,8 @@ class LoginScreen extends React.Component {
                         />
 
                         <TextInput
-                            onChangeText={email => this.setState({email:email})}
-                            value={this.state.email}
+                            onChangeText={email => this.props.updateEmail(email)}
+                            value={this.props.user.email}
                             autoCompleteType={'email'}
                             clearButtonMode={'while-editing'}
                             returnKeyLabel={'next'}
@@ -98,8 +101,8 @@ class LoginScreen extends React.Component {
                         />
 
                         <TextInput 
-                            onChangeText={password => this.setState({password:password})}
-                            value={this.state.password}
+                            onChangeText={password => this.props.updatePassword(password)}
+                            value={this.props.user.password}
                             autoCompleteType={'password'}
                             clearButtonMode={'while-editing'}
                             returnKeyLabel={'done'}
@@ -187,7 +190,7 @@ class LoginScreen extends React.Component {
                         <Text style={{fontStyle:'italic'}}>Inicia sin registro</Text>
                     </TouchableOpacity>
 
-                    <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#1389CE"/>
+                    <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="auto"/>
                     </View>
                     <Text style={[styles.forgotPassword,{marginTop:15}]}>¿No tienes una cuenta?</Text>
                     <TouchableOpacity style={{alignItems:'center'}}
@@ -265,4 +268,17 @@ const styles = StyleSheet.create({
 });
 
 
-export default LoginScreen
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators({ updateEmail, updatePassword, login, getUser, loginAnon}, dispatch)
+}
+
+const mapStateToProps = state => {
+	return {
+		user: state.user
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(LoginScreen)
