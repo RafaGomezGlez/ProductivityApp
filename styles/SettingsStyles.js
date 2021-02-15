@@ -8,7 +8,7 @@ const height = Dimensions.get('window').height
 export const styles = StyleSheet.create ({
   container: {
     flex: 1,
-    backgroundColor:"#DADADA"
+    backgroundColor:"white"
   },
   centerAlignment: {
     justifyContent: 'center',
@@ -23,8 +23,8 @@ export const styles = StyleSheet.create ({
     flex: 1,
     marginTop: 10,
     width: width,
-    height: height*0.11,
-    backgroundColor: '#DADADA',
+    height: height*0.05,
+    backgroundColor: 'white',
   },
   option: {
     justifyContent: 'space-between',
@@ -54,5 +54,11 @@ export const styles = StyleSheet.create ({
   },
   logOutText: {
     fontSize: width*.07,
+  },
+  date: {
+    textAlign:'center',
+    textAlignVertical:'center',
+    fontSize:width*0.1,
+    color: 'gray'
   }
 })

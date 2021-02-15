@@ -17,11 +17,11 @@ function SettingsStackScreen(){
         options = {{
           headerShown: true,
           headerStyle:{
-            backgroundColor: '#DADADA',
+            backgroundColor: 'white',
           }, 
           headerTitleStyle:{
             fontSize: screenWidth*0.09,
-            color: '#5D4D4A',
+            color: 'black',
           }
         }}
       />
