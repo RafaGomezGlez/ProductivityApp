@@ -52,8 +52,19 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   textChipStyle: {
-    fontSize: 16,
+    fontSize: 17,
   },
+  timesStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: "8%",
+  },
+  roundedTimes: {
+    borderWidth: 1,
+    borderRadius: 50,
+
+  },
+
   cuantificacionStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -113,11 +124,24 @@ const styles = StyleSheet.create({
   inactiveDayText: {
     color: 'black',
   },
-  buttonViewStyle: {
-    marginRight: "8%",
-    height: '10%',
+  roundedButton: {
+    backgroundColor: '#1389CE',
     marginBottom: '10%',
-    marginLeft: "5%",
+    marginTop: '5%',
+    // marginLeft: "5%",
+    marginRight: "8%",
+    borderRadius: 50,
+    width: "50%",
+    height: heightScreen * .08,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    elevation: 7,
+  },
+  textRoundedButton: {
+    color: 'white',
+    fontSize: 22,
+    fontWeight: 'bold'
   },
 })
 

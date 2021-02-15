@@ -16,6 +16,8 @@ class FormularyPage extends React.Component{
       task: '',
       switchEnabled: false,
       buttonDisabled: false,
+      modalTitle: "",
+      modalActive: false,
       elemChips: [
         { key: 'Trabajo', mainColor: "#1365CF",
         brighterColor: "#9DB8DD", darkerColor: "#0154C1",  status: false },
@@ -80,6 +82,18 @@ class FormularyPage extends React.Component{
     this.setState({switchEnabled: !this.state.switchEnabled})
   }
 
+  changeModalActive = () => {
+    this.setState({
+      modalActive: !this.state.modalActive
+    })
+  }
+
+  selectTimes = () => {
+    this.setState({
+      modalTitle: "veces",
+      modalActive: true,
+    })
+  }
 
   //for changing day selection
   selectDays = day => {
@@ -89,6 +103,10 @@ class FormularyPage extends React.Component{
         return { key: elem.key, status: !elem.status }
       })
     })
+  }
+
+  selectCuantification = () => {
+    this.changeObj('elemCuantification', 'time')
   }
 
   //func when you click the button
@@ -146,7 +164,9 @@ class FormularyPage extends React.Component{
   render(){
     return (
       <View style={styles.screenStyle}>
-      <ModalView />
+      {this.state.modalActive ?
+        <ModalView changeModalActive={() => this.changeModalActive()} title={this.state.modalTitle}/> :
+      null }
       <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#017AC1"/>
         <ScrollView style={styles.scrollViewStyle} >
             <View>
@@ -175,6 +195,15 @@ class FormularyPage extends React.Component{
                 )}
               </View>
 
+              <View style={styles.timesStyle}>
+                <TouchableOpacity
+                style={styles.roundedTimes}
+                activeOpacity={1}
+                onPress={() => this.selectTimes()}>
+                  <Text style={styles.textTitle}> Press </Text>
+                </TouchableOpacity>
+              </View>
+
               <View style={styles.cuantificacionStyle}>
                 <Text style={styles.textTitle}>Cuantificación: </Text>
                 <Switch
@@ -188,7 +217,7 @@ class FormularyPage extends React.Component{
                 <View style={styles.cuantificacionViewStyle}>
                  <Text> ¿Cómo vas a cuantificar? </Text>
                  <View style={styles.habitsIconsView}>
-                  <TouchableOpacity style={styles.iconStyle} onPress={() => this.changeObj('elemCuantification', 'time')}>
+                  <TouchableOpacity style={styles.iconStyle} onPress={() => this.selectCuantification()}>
                     <MaterialCommunityIcons
                     name={this.state.elemCuantification[0].status ? "clock-time-eight-outline" : "clock-time-eight"}
                     color={this.state.elemCuantification[0].status ? '#1389CE' : 'black'}
@@ -206,12 +235,12 @@ class FormularyPage extends React.Component{
                  </View>
                  {this.state.elemCuantification[0].status ?
                    <View>
-                    <Text> Tiempo </Text>
+                    <Text> Tiempo: </Text>
                    </View>
                    : null}
                  {this.state.elemCuantification[1].status ?
                    <View>
-                    <Text> Repeticion </Text>
+                    <Text> Repeticion: </Text>
                    </View>
                    : null}
                 </View>
@@ -224,17 +253,17 @@ class FormularyPage extends React.Component{
               <View style={styles.habitsIconsView}>
                 <TouchableOpacity style={styles.iconStyle} onPress={() => this.changeObj('elemRepetition', 'day')}>
                   <MaterialIcons name={'today'} size={75}
-                  color={this.state.elemRepetition[0].status ? '#1389CE' : 'black'}/>
+                  color={this.state.elemRepetition[0].status ? '#1389CE' : '#4B4B4B'}/>
                   <Text style={styles.textIconStyle}>Día</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.iconStyle} onPress={() => this.changeObj('elemRepetition', 'week')}>
                   <MaterialCommunityIcons name={'calendar-week'} size={75}
-                  color={this.state.elemRepetition[1].status ? '#1389CE' : 'black'}/>
+                  color={this.state.elemRepetition[1].status ? '#1389CE' : '#4B4B4B'}/>
                   <Text style={styles.textIconStyle}>Semana</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.iconStyle} onPress={() => this.changeObj('elemRepetition', 'month')}>
                   <MaterialCommunityIcons name={'calendar-month'} size={75}
-                  color={this.state.elemRepetition[2].status ? '#1389CE' : 'black'}/>
+                  color={this.state.elemRepetition[2].status ? '#1389CE' : '#4B4B4B'}/>
                   <Text style={styles.textIconStyle}>Mes</Text>
                 </TouchableOpacity>
               </View>
@@ -255,9 +284,11 @@ class FormularyPage extends React.Component{
               </View> : null
               }
           </View>
-          <View style={styles.buttonViewStyle}>
-            <Button title="Create task" onPress={this.addTask} disabled={this.state.buttonDisabled}/>
-          </View>
+
+          <TouchableOpacity style={styles.roundedButton} onPress={this.addTask} disabled={this.state.buttonDisabled}>
+            <Text style={styles.textRoundedButton}>Create Task</Text>
+          </TouchableOpacity>
+
         </ScrollView>
       </View>
     );

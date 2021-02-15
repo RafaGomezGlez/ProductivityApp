@@ -22,6 +22,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#eee'
   },
+  flatListContainer: {
+    flex: 1,
+    paddingTop: '5%'
+  },
+  flatListItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: heightScreen * .08,
+  },
+  flatListTitle: {
+    fontSize: 28,
+  },
 })
 
 
