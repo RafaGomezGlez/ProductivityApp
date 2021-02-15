@@ -1,23 +1,27 @@
 
 export const icons = [
   {
-    icon: 'palette',
-    text: ' Tema '
+    icon: 'account-outline',
+    text: 'Account'
   },
   {
-    icon: 'clock-time-five',
-    text: ' Hora límite '
+    icon: 'palette-outline',
+    text: 'Theme'
   },
   {
-    icon: 'bell',
-    text: ' Notificaciones '
+    icon: 'clock-time-five-outline',
+    text: 'Deadline'
   },
   {
-    icon: 'account-multiple',
-    text: ' Invita a un amigo '
+    icon: 'bell-outline',
+    text: 'Notifications'
+  },
+  {
+    icon: 'account-multiple-outline',
+    text: 'More'
   },  
   {
-    icon: 'star',
-    text: ' Califícanos '
+    icon: 'star-outline',
+    text: 'Rate us'
   },  
 ]

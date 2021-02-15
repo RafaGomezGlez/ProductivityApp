@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, SafeAreaView, StyleSheet, StatusBar, Dimensions, ScrollView, TouchableOpacity} from 'react-native'
+import {View, Text, SafeAreaView, StyleSheet, StatusBar, Dimensions, ScrollView, TouchableOpacity, FlatList} from 'react-native'
 import Setting from '../components/Setting'
 import {styles} from '../styles/SettingsStyles'
 import {icons} from '../data/iconsData'
@@ -17,24 +17,24 @@ class SettingsPage extends React.PureComponent{
     fb.auth().signOut().then(
       this.props.getUser('null')
     )
+  } 
+
+  key = (item, index) => {
+    return item.text+index
   }
  
   render() {
     return(
       <SafeAreaView style = {styles.container} >
         <ScrollView> 
-          <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#DADADA"/>
-          
-          {icons.map((icon,index) => (
-            <Setting info = {icon} />
-          ))}
-
-          <View style = {[styles.logOut, styles.centerAlignment]} > 
-            <TouchableOpacity onPress={this.logOut} >
-              <Text style = {styles.logOutText}> Cerrar sesión </Text>
-            </TouchableOpacity>
+          <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="white"/>
+            <FlatList
+              renderItem={({item, index})=>(<Setting item={item} logOut = {this.logOut} />)}
+              data={icons}
+              keyExtractor={(item,index)=>this.key(item,index)}
+            /> 
             
-          </View>
+          
 
 
         </ScrollView>
