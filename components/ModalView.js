@@ -11,14 +11,27 @@ class ModalView extends React.Component{
     this.state = {
       modalActive: true,
       title: this.props.title,
-      numbs: [...new Array(100)].map((value, index) => index.toString()),
+      numbs: [...new Array(99)].map((value, index) => (index+1).toString()),
     }
   }
+
+  renderItem = ({item, index}) => (
+      <TouchableOpacity style={styles.flatListItem} key={item.id} onPress={() => this.pickElement(item)}>
+        <Text style={styles.flatListTitle}> {item} </Text>
+      </TouchableOpacity>
+    )
+
 
   componentDidMount = () => {
     this.setState({
       title: this.props.title,
+      elementToChange: this.props.elementToChange
     })
+  }
+
+  pickElement = (item) => {
+    this.props.changeElem(item, this.state.elementToChange)
+    this.props.changeModalActive()
   }
 
   render(){
@@ -31,8 +44,10 @@ class ModalView extends React.Component{
                 <TouchableOpacity onPress={() => this.props.changeModalActive()}>
                   <Ionicons name="close" size={35}/>
                 </TouchableOpacity>
-                <Text>{this.state.title}</Text>
-                <View></View>
+                <Text style={styles.titleStyle}>{this.state.title}</Text>
+                <View>
+                  <Ionicons name="close" size={35} color={'#1389CE'}/>
+                </View>
               </View>
 
               <View style={styles.flatListContainer}>
@@ -40,11 +55,9 @@ class ModalView extends React.Component{
                   data={this.state.numbs}
                   keyExtractor={item => item.id}
                   ItemSeparatorComponent={Divider}
-                  renderItem={({item, index}) => (
-                    <TouchableOpacity style={styles.flatListItem} key={item.id}>
-                      <Text style={styles.flatListTitle}> {item} </Text>
-                    </TouchableOpacity>
-                  )}
+                  renderItem={this.renderItem}
+                  initialNumToRender={5}
+                  maxToRenderPerBatch={5}
                 />
               </View>
 

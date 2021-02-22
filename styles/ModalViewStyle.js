@@ -20,7 +20,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#eee'
+    backgroundColor: '#1389CE'
+  },
+  titleStyle: {
+    color: "white",
+    fontSize: 20,
   },
   flatListContainer: {
     flex: 1,
