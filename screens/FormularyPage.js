@@ -112,8 +112,8 @@ class FormularyPage extends React.Component{
   }
 
   openModal = (title, elementToChange) => {
-    if( (this.state.elemCuantification[0].status && this.state.elemCuantification[0].key == elementToChange)
-    || (this.state.elemCuantification[1].status && this.state.elemCuantification[1].key == elementToChange) ){
+    if(((this.state.elemCuantification[0].status && this.state.elemCuantification[0].key == elementToChange)
+      || (this.state.elemCuantification[1].status && this.state.elemCuantification[1].key == elementToChange)) ){
       this.setState({
         repeat: 0,
         time: 0,
@@ -136,7 +136,8 @@ class FormularyPage extends React.Component{
     this.setState({
       [element]: newTime
     })
-    this.changeRepetitions('elemCuantification', element)
+    if(element !== "timesToDo")
+      this.changeRepetitions('elemCuantification', element)
   }
 
   //func when you click the button and add to the main page
@@ -203,7 +204,7 @@ class FormularyPage extends React.Component{
       task.cuantification = "none"
     }
 
-    // console.log(task)
+    //console.log(task)
     mounted = false
     this.props.route.params.addTask(task)
     this.props.navigation.goBack()
