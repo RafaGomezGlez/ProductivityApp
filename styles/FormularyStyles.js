@@ -28,14 +28,13 @@ const styles = StyleSheet.create({
     marginLeft: "5%",
   },
   input: {
-    height: heightScreen * .05,
     width: widthScreen * .8,
     justifyContent: 'center',
     marginTop: heightScreen * .03,
     marginBottom: '2%',
   },
   textInput: {
-    fontSize: 35,
+    fontSize: 33,
     borderBottomWidth: 2,
     borderColor: "black"
   },

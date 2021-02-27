@@ -17,7 +17,7 @@ class FormularyPage extends React.Component{
       switchEnabled: false,
       buttonDisabled: false,
       timesToDo: 0,
-      repetitions: 0,
+      repeat: 0,
       time: 0, //prone to change
       modalTitle: "",
       elementToChangeModal: "",
@@ -112,6 +112,18 @@ class FormularyPage extends React.Component{
   }
 
   openModal = (title, elementToChange) => {
+    if( (this.state.elemCuantification[0].status && this.state.elemCuantification[0].key == elementToChange)
+    || (this.state.elemCuantification[1].status && this.state.elemCuantification[1].key == elementToChange) ){
+      this.setState({
+        repeat: 0,
+        time: 0,
+        elemCuantification: this.state.elemCuantification.map(elem =>{
+          return {key: elem.key, status: false}
+        })
+      })
+      return
+    }
+
     this.setState({
       modalTitle: title,
       elementToChangeModal: elementToChange,
@@ -119,14 +131,12 @@ class FormularyPage extends React.Component{
     })
   }
 
+
   changeElem = (newTime, element) => {
     this.setState({
       [element]: newTime
     })
-    if(element === "time")
-      this.changeRepetitions('elemCuantification', "time")
-    if(element === "repetitions")
-      this.changeRepetitions('elemCuantification', "repeat")
+    this.changeRepetitions('elemCuantification', element)
   }
 
   //func when you click the button and add to the main page
@@ -166,7 +176,7 @@ class FormularyPage extends React.Component{
       }
       if(this.state.elemCuantification[1].status === true){
         var cuantification = "repeat"
-        var quantityCuantification = this.state.repetitions
+        var quantityCuantification = this.state.repeat
       }
     } catch(err) {
       Alert.alert(
@@ -186,14 +196,14 @@ class FormularyPage extends React.Component{
     if(task.repetition === 'day')
       task.days = days
     if(this.state.elemCuantification[0].status === true || this.state.elemCuantification[1].status === true){
-      task.cuantificacion = cuantification
+      task.cuantification = cuantification
       task.quantityCuantification = quantityCuantification
     }
     else {
       task.cuantification = "none"
     }
 
-    console.log(task)
+    // console.log(task)
     mounted = false
     this.props.route.params.addTask(task)
     this.props.navigation.goBack()
@@ -221,6 +231,7 @@ class FormularyPage extends React.Component{
                       onChangeText={this.changeTask}
                       value={this.state.task}
                       style = {styles.textInput}
+                      textAlign = "center"
                       />
                   </View>
 
@@ -291,7 +302,7 @@ class FormularyPage extends React.Component{
                 }
 
                 <View style={styles.cuantificacionStyle}>
-                  <Text style={styles.textTitle}>Otros: </Text>
+                  <Text style={styles.textTitle}>Opcional: </Text>
                   <Switch
                   onValueChange={this.changeSwitch}
                   value={this.state.switchEnabled}
@@ -312,7 +323,7 @@ class FormularyPage extends React.Component{
                       />
                       <Text> Tiempo </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.iconStyle} onPress={() => this.openModal("Repeticion", "repetitions")}>
+                    <TouchableOpacity style={styles.iconStyle} onPress={() => this.openModal("Repeticion", "repeat")}>
                       <MaterialCommunityIcons
                       name={"repeat"}
                       size={65}
@@ -327,7 +338,7 @@ class FormularyPage extends React.Component{
                      : null}
                    {this.state.elemCuantification[1].status ?
                      <View>
-                      <Text> Repeticion: {this.state.repetitions} </Text>
+                      <Text> Repeticion: {this.state.repeat} </Text>
                      </View>
                      : null}
                   </View>
