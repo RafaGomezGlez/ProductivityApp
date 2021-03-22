@@ -9,14 +9,13 @@ class ModalView extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      modalActive: true,
       title: this.props.title,
       numbs: [...new Array(99)].map((value, index) => (index+1).toString()),
     }
   }
 
   renderItem = ({item, index}) => (
-      <TouchableOpacity style={styles.flatListItem} key={item.id} onPress={() => this.pickElement(item)}>
+      <TouchableOpacity style={styles.flatListItem} key={index} onPress={() => this.pickElement(item)}>
         <Text style={styles.flatListTitle}> {item} </Text>
       </TouchableOpacity>
     )
@@ -36,7 +35,7 @@ class ModalView extends React.Component{
 
   render(){
   return(
-      <Modal transparent statusBarTranslucent={true} visible={this.state.modalActive} animationType="slide">
+      <Modal transparent statusBarTranslucent={true} visible={true} animationType="slide">
           <View style={styles.container}>
             <View style={styles.pickerContainer}>
 
@@ -53,11 +52,11 @@ class ModalView extends React.Component{
               <View style={styles.flatListContainer}>
                 <FlatList
                   data={this.state.numbs}
-                  keyExtractor={item => item.id}
+                  keyExtractor={(item, index) => index.toString()}
                   ItemSeparatorComponent={Divider}
                   renderItem={this.renderItem}
                   initialNumToRender={5}
-                  maxToRenderPerBatch={5}
+                  maxToRenderPerBatch={25}
                 />
               </View>
 

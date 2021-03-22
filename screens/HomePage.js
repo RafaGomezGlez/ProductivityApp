@@ -35,11 +35,19 @@ export default class HomePage extends React.Component{
       category: task.category,
       repetition: task.repetition,
       days: task.days,
-      text: task.category + " " + task.mainColorcolor + " " + task.repetition + " " + task.days,
+      text: task.category + " " + task.mainColor + " " + task.repetition + " " + task.days,
       mainColor: task.mainColor,
       brighterColor: task.brighterColor,
       darkerColor: task.darkerColor,
     }
+    if (task.cuantification !== "none"){
+      newItem["cuantification"] = task.cuantification
+      newItem["quantityCuantification"] = task.quantityCuantification
+    }
+    else {
+      newItem["cuantification"] = "none"
+    }
+    console.log(newItem)
     this.setState({
       carouselItems: [newItem, ...this.state.carouselItems]
     })

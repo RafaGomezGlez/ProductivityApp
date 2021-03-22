@@ -12,11 +12,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)'
   },
   pickerContainer: {
-    height: 300,
+    height: heightScreen * .5,
     width: '100%',
     backgroundColor: 'white',
   },
   header: {
+    height: "15%",
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',

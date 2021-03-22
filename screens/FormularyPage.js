@@ -6,6 +6,7 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
 import ModalView from '../components/ModalView'
+import ModalViewTime from '../components/ModalViewTime'
 
 import styles from '../styles/FormularyStyles'
 
@@ -18,23 +19,18 @@ class FormularyPage extends React.Component{
       buttonDisabled: false,
       timesToDo: 0,
       repeat: 0,
-      time: 0, //prone to change
+      time: [0, 0], //prone to change
       modalTitle: "",
       elementToChangeModal: "",
       modalActive: false,
+      modalTimeActive: false,
       elemChips: [
-        { key: 'Trabajo', mainColor: "#1365CF",
-        brighterColor: "#9DB8DD", darkerColor: "#0154C1",  status: false },
-        { key: 'Deportes', mainColor: "#BC0701",
-        brighterColor: "#D18885", darkerColor: "#9D0601",  status: false },
-        { key: 'Salud', mainColor: "#29BC01",
-        brighterColor: "#72EC51", darkerColor: "#239D01",  status: false },
-        { key: 'Cultura', mainColor: "#CE6213",
-        brighterColor: "#FCB27E", darkerColor: "#C15101", status: false },
-        { key: 'Finanzas', mainColor: "#01AED5",
-        brighterColor: "#70E5FF", darkerColor: "#0096B8",  status: false },
-        { key: 'Higiene', mainColor: "#CE1365",
-        brighterColor: "#E080AA", darkerColor: "#C10154",  status: false },
+        { key: 'Trabajo', mainColor: "#1365CF", brighterColor: "#9DB8DD", darkerColor: "#0154C1",  status: false },
+        { key: 'Deportes', mainColor: "#BC0701", brighterColor: "#D18885", darkerColor: "#9D0601",  status: false },
+        { key: 'Salud', mainColor: "#29BC01", brighterColor: "#72EC51", darkerColor: "#239D01",  status: false },
+        { key: 'Cultura', mainColor: "#CE6213", brighterColor: "#FCB27E", darkerColor: "#C15101", status: false },
+        { key: 'Finanzas', mainColor: "#01AED5", brighterColor: "#70E5FF", darkerColor: "#0096B8",  status: false },
+        { key: 'Higiene', mainColor: "#CE1365", brighterColor: "#E080AA", darkerColor: "#C10154",  status: false },
       ],
       elemCuantification: [
         { key: 'time', status: false },
@@ -87,13 +83,9 @@ class FormularyPage extends React.Component{
     })
   }
 
-  changeTask = task => {
-    this.setState({task})
-  }
+  changeTask = task => { this.setState({task}) }
 
-  changeSwitch = () => {
-    this.setState({switchEnabled: !this.state.switchEnabled})
-  }
+  changeSwitch = () => { this.setState({switchEnabled: !this.state.switchEnabled})}
 
   //for changing day selection
   selectDays = day => {
@@ -105,11 +97,9 @@ class FormularyPage extends React.Component{
     })
   }
 
-  changeModalActive = () => {
-    this.setState({
-      modalActive: !this.state.modalActive
-    })
-  }
+  changeModalActive = () => { this.setState({modalActive: !this.state.modalActive})}
+
+  changeModalTimeActive = () => {this.setState({modalTimeActive: !this.state.modalTimeActive})}
 
   openModal = (title, elementToChange) => {
     if(((this.state.elemCuantification[0].status && this.state.elemCuantification[0].key == elementToChange)
@@ -124,6 +114,14 @@ class FormularyPage extends React.Component{
       return
     }
 
+    if(elementToChange == "time"){
+      this.setState({
+        modalTimeTitle: title,
+        modalTimeActive: true
+      })
+      return
+    }
+
     this.setState({
       modalTitle: title,
       elementToChangeModal: elementToChange,
@@ -131,14 +129,12 @@ class FormularyPage extends React.Component{
     })
   }
 
-
   changeElem = (newTime, element) => {
-    this.setState({
-      [element]: newTime
-    })
-    if(element !== "timesToDo")
-      this.changeRepetitions('elemCuantification', element)
+    this.setState({ [element]: newTime })
+    if(element !== "timesToDo") this.changeRepetitions('elemCuantification', element)
   }
+
+  changeCuantificationTime = (minutes, seconds) => { this.changeElem([minutes, seconds], "time") }
 
   //func when you click the button and add to the main page
   addTask = () => {
@@ -150,7 +146,6 @@ class FormularyPage extends React.Component{
     setTimeout(()=>{
       if(mounted){this.setState({buttonDisabled: false})}}
       , 500)
-
 
     try{
       var name = this.state.task
@@ -173,7 +168,11 @@ class FormularyPage extends React.Component{
       }
       if(this.state.elemCuantification[0].status === true){
         var cuantification = "time"
-        var quantityCuantification = this.state.time
+        let minutes = this.state.time[0]
+        parseInt(minutes)
+        let seconds = this.state.time[1]
+        parseInt(seconds)
+        var quantityCuantification = [minutes, seconds]
       }
       if(this.state.elemCuantification[1].status === true){
         var cuantification = "repeat"
@@ -204,7 +203,6 @@ class FormularyPage extends React.Component{
       task.cuantification = "none"
     }
 
-    //console.log(task)
     mounted = false
     this.props.route.params.addTask(task)
     this.props.navigation.goBack()
@@ -219,6 +217,13 @@ class FormularyPage extends React.Component{
         changeElem={(newElem, element) => this.changeElem(newElem, element)}
         title={this.state.modalTitle}
         elementToChange={this.state.elementToChangeModal}
+        /> :
+      null }
+      {this.state.modalTimeActive ?
+        <ModalViewTime
+        changeModalTimeActive={() => this.changeModalTimeActive()}
+        changeCuantificationTime={(minutes, seconds) => this.changeCuantificationTime(minutes, seconds)}
+        title={this.state.modalTimeTitle}
         /> :
       null }
       <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#017AC1"/>
@@ -316,7 +321,7 @@ class FormularyPage extends React.Component{
                   <View style={styles.cuantificacionViewStyle}>
                    <Text> ¿Cómo vas a cuantificar? </Text>
                    <View style={styles.habitsIconsView}>
-                    <TouchableOpacity style={styles.iconStyle} onPress={() => this.openModal("Tiempo", "time")}>
+                    <TouchableOpacity style={styles.iconStyle} onPress={() => this.openModal("Pick Time", "time")}>
                       <MaterialCommunityIcons
                       name={this.state.elemCuantification[0].status ? "clock-time-eight-outline" : "clock-time-eight"}
                       color={this.state.elemCuantification[0].status ? '#1389CE' : '#4B4B4B'}
@@ -334,7 +339,7 @@ class FormularyPage extends React.Component{
                    </View>
                    {this.state.elemCuantification[0].status ?
                      <View>
-                      <Text> Tiempo: {this.state.time}</Text>
+                      <Text> Tiempo: {this.state.time[0]} : {this.state.time[1]}</Text>
                      </View>
                      : null}
                    {this.state.elemCuantification[1].status ?
