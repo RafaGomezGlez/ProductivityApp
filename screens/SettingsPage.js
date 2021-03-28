@@ -1,30 +1,39 @@
 import React from 'react';
-import {View, Text, SafeAreaView, StyleSheet, StatusBar, Dimensions, ScrollView, TouchableOpacity} from 'react-native'
+import {View, Text, SafeAreaView, StyleSheet, StatusBar, Dimensions, ScrollView, TouchableOpacity, FlatList} from 'react-native'
 import Setting from '../components/Setting'
 import {styles} from '../styles/SettingsStyles'
 import {icons} from '../data/iconsData'
 import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
+import fb from '../firebase/firebase'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { 
+  getUser
+} from '../actions/user'
 
+class SettingsPage extends React.PureComponent{
+  
+  logOut = () => {
+    fb.auth().signOut().then(
+      this.props.getUser('null')
+    )
+  } 
 
-export default class SettingsPage extends React.PureComponent{
-
-
+  key = (item, index) => {
+    return item.text+index
+  }
+ 
   render() {
     return(
       <SafeAreaView style = {styles.container} >
-        <ScrollView>
+        <ScrollView> 
           <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="white"/>
-          <View style = {styles.title}>
-            <Text style =  {styles.textTitle}> Ajustes</Text>
-          </View>
+            <FlatList
+              renderItem={({item, index})=>(<Setting item={item} logOut = {this.logOut} />)}
+              data={icons}
+              keyExtractor={(item,index)=>this.key(item,index)}
+            /> 
 
-          {icons.map(icon => (
-            <Setting info = {icon} />
-          ))}
-
-          <View style = {[styles.logOut, styles.centerAlignment]} >
-            <Text style = {styles.logOutText}> Cerrar sesión </Text>
-          </View>
 
 
         </ScrollView>
@@ -32,3 +41,20 @@ export default class SettingsPage extends React.PureComponent{
     );
   }
 }
+
+
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators({ getUser }, dispatch)
+}
+
+const mapStateToProps = state => {
+	return {
+		user: state.user
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(SettingsPage)
+

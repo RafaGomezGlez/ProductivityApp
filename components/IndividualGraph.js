@@ -31,7 +31,7 @@ export default class Chart extends React.Component{
       width: this.props.width*0.14,
       size: this.props.width,
       color: this.props.color,
-      fontSize: this.props.width*0.28
+      fontSize: this.props.width*0.26
     }
   }
 

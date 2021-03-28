@@ -8,22 +8,23 @@ const height = Dimensions.get('window').height
 export const styles = StyleSheet.create ({
   container: {
     flex: 1,
-    backgroundColor: '#e4e6eb'
+    backgroundColor:"white"
   },
   centerAlignment: {
     justifyContent: 'center',
     alignSelf: 'center'
   },
   title: {
-    width:width*0.90,
-    height: height*0.08, 
-    marginTop: StatusBar.currentHeight,
+    fontSize: width * 0.09, 
+    color: '#5D4D4A',
+    fontWeight: 'bold',
   },
   optionContainer: {
     flex: 1,
     marginTop: 10,
     width: width,
-    height: height*0.11,
+    height: height*0.05,
+    backgroundColor: 'white',
   },
   option: {
     justifyContent: 'space-between',
@@ -46,11 +47,18 @@ export const styles = StyleSheet.create ({
   },
   logOut: {
     marginTop: 10,
-    backgroundColor: 'yellow',
+    backgroundColor: "#0dceda",
     borderRadius: 30,
-    padding: 12
+    padding: 12,
+    elevation: 4
   },
   logOutText: {
     fontSize: width*.07,
+  },
+  date: {
+    textAlign:'center',
+    textAlignVertical:'center',
+    fontSize:width*0.1,
+    color: 'gray'
   }
 })
