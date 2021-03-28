@@ -33,8 +33,7 @@ class SettingsPage extends React.PureComponent{
               data={icons}
               keyExtractor={(item,index)=>this.key(item,index)}
             /> 
-            
-          
+
 
 
         </ScrollView>
@@ -42,6 +41,7 @@ class SettingsPage extends React.PureComponent{
     );
   }
 }
+
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({ getUser }, dispatch)
