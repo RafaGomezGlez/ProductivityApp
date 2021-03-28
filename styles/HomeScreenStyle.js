@@ -19,6 +19,7 @@ const scaling = (fontSize) => {
 
 const styles = StyleSheet.create({
   screenStyle:{
+    paddingTop: Constants.statusBarHeight,
     backgroundColor: "#1389CE",
     height: heightAppScreen,
     flexDirection: "column",

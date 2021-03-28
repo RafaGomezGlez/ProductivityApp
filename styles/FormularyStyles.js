@@ -10,9 +10,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollViewStyle: {
-    marginTop: "5%",
-    marginLeft: "5%",
-    marginBottom: "7%",
     height: heightScreen * .7,
   },
   textTitle: {
@@ -20,23 +17,33 @@ const styles = StyleSheet.create({
     letterSpacing: .05,
     fontWeight: '600',
   },
+  topElements: {
+    backgroundColor: "#8ad4ff",
+    borderBottomLeftRadius: 35,
+    borderBottomRightRadius: 35,
+    alignItems: 'center'
+  },
+  bottomElements: {
+    marginTop: heightScreen *.03,
+    marginLeft: "5%",
+  },
   input: {
-    height: heightScreen * .05,
-    width: widthScreen * .70,
+    width: widthScreen * .8,
     justifyContent: 'center',
-    marginTop: '2%',
+    marginTop: heightScreen * .03,
     marginBottom: '2%',
   },
   textInput: {
-    fontSize: 27,
+    fontSize: 33,
     borderBottomWidth: 2,
     borderColor: "black"
   },
   rowChips: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'center',
     paddingHorizontal: '1%',
-    marginRight: "8%",
+    width: widthScreen * .8,
     marginTop: '1.8%',
     marginBottom: '1.8%',
   },
@@ -49,11 +56,27 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   inactiveChipStyle: {
-    backgroundColor: '#DADADA',
+    backgroundColor: 'white',
     color: 'black',
   },
   textChipStyle: {
-    fontSize: 16,
+    fontSize: 17,
+  },
+  timesStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: widthScreen,
+    marginBottom: heightScreen * .03,
+    marginTop: heightScreen * .01
+  },
+  roundedTimes: {
+    borderWidth: 1,
+    borderRadius: 50,
+    width: "30%",
+    alignItems: 'center',
+    borderColor: 'white',
+    backgroundColor: "#8ad4ff",
+    elevation: 5,
   },
   cuantificacionStyle: {
     flexDirection: 'row',
@@ -114,11 +137,23 @@ const styles = StyleSheet.create({
   inactiveDayText: {
     color: 'black',
   },
-  buttonViewStyle: {
-    marginRight: "8%",
-    height: '10%',
+  roundedButton: {
+    backgroundColor: '#1389CE',
     marginBottom: '10%',
-    marginLeft: "5%",
+    marginTop: '10%',
+    // marginLeft: "5%",
+    borderRadius: 50,
+    width: "50%",
+    height: heightScreen * .08,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    elevation: 7,
+  },
+  textRoundedButton: {
+    color: 'white',
+    fontSize: 22,
+    fontWeight: 'bold'
   },
 })
 

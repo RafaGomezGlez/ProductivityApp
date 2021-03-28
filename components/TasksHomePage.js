@@ -10,7 +10,7 @@ import { Ionicons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 //props.proporcion
 
 export default TasksHomePage = props => (
-    <View style={[styles.containerSquare, {borderColor: props.task.color}]}>
+    <View style={[styles.containerSquare, {borderColor: props.task.mainColor}]}>
       <View style={styles.logo}>
         <Ionicons name= {props.task.icon} size={65} color='black' />
       </View>
