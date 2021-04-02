@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     color: "white",
-    fontSize: 20,
+    fontSize: 0.049 * widthScreen,
   },
   flatListContainer: {
     flex: 1,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     height: heightScreen * .08,
   },
   flatListTitle: {
-    fontSize: 28,
+    fontSize: 0.068 * widthScreen,
   },
 })
 

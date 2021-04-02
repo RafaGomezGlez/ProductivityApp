@@ -4,6 +4,15 @@ import {StyleSheet, Dimensions} from 'react-native'
 const widthScreen = Dimensions.get('window').width;
 const heightScreen = Dimensions.get('window').height;
 
+const scale = 405;
+
+const scaleFontSize = (fontSize) => {
+  console.log(widthScreen)
+  const ratio = fontSize / scale;
+  const newSize = Math.round(ratio * widthScreen);
+  return newSize;
+}
+
 const styles = StyleSheet.create({
   screenStyle: {
     backgroundColor: 'white',
@@ -13,7 +22,7 @@ const styles = StyleSheet.create({
     height: heightScreen * .7,
   },
   textTitle: {
-    fontSize: 28,
+    fontSize: 0.068 * widthScreen,
     letterSpacing: .05,
     fontWeight: '600',
   },
@@ -34,7 +43,7 @@ const styles = StyleSheet.create({
     marginBottom: '2%',
   },
   textInput: {
-    fontSize: 33,
+    fontSize: 0.08 * widthScreen,
     borderBottomWidth: 2,
     borderColor: "black"
   },
@@ -60,7 +69,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   textChipStyle: {
-    fontSize: 17,
+    fontSize: 0.041 * widthScreen,
   },
   timesStyle: {
     alignItems: 'center',
@@ -105,7 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   textIconStyle: {
-    fontSize: 22,
+    fontSize: 0.0535 * widthScreen,
     fontWeight: '600',
     backgroundColor: 'transparent'
   },
@@ -152,7 +161,7 @@ const styles = StyleSheet.create({
   },
   textRoundedButton: {
     color: 'white',
-    fontSize: 22,
+    fontSize: 0.054 * widthScreen,
     fontWeight: 'bold'
   },
 })

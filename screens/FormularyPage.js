@@ -19,7 +19,7 @@ class FormularyPage extends React.Component{
       buttonDisabled: false,
       timesToDo: 0,
       repeat: 0,
-      time: [0, 0], //prone to change
+      time: [0, 0], 
       modalTitle: "",
       elementToChangeModal: "",
       modalActive: false,

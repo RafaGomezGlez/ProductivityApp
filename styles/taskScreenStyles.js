@@ -33,14 +33,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textContinue:{
-    fontSize: 25,
+    fontSize: 0.061 * widthScreen,
     letterSpacing: .01,
   },
   yourDaysGrouping:{
     marginLeft: widthScreen * .04
   },
   yourDaysText: {
-    fontSize: 30,
+    fontSize: 0.073 * widthScreen,
     letterSpacing: .01,
   },
   tabsGrouping: {

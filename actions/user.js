@@ -35,7 +35,7 @@ export const login = () => {
 
             var errorCode = e.code;
 			var errorMessage = e.message;
-			
+
             if (errorCode === 'auth/wrong-password') {
                 alert('Contraseña incorrecta.');
             } else if (errorCode === 'auth/user-not-found'){
@@ -47,7 +47,7 @@ export const login = () => {
             } else {
                 alert("Algo salió mal. Intenta de nuevo. :(")
 			}
-			
+
 		}
 	}
 }
@@ -57,14 +57,13 @@ export const loginAnon = () => {
 	return async (dispatch, getState) => {
 		try {
 
-			const response = await Firebase.auth().signInAnonymously()
-			dispatch({ type: LOGINANON, payload: {uid: response.user.uid} })
+			dispatch({ type: LOGINANON, payload: {uid: "bryan"} })
 
 		} catch (e) {
 
             var errorCode = e.code;
 			var errorMessage = e.message;
-			
+
             if (errorCode === 'auth/wrong-password') {
                 alert('Contraseña incorrecta.');
             } else if (errorCode === 'auth/user-not-found'){
@@ -74,9 +73,9 @@ export const loginAnon = () => {
             } else if (errorCode === 'auth/invalid-email' || errorCode === 'auth/argument-error'  ){
                 alert('Ingresa un correo electrónico con el siguiente formato:\nalguien@ejemplo.com')
             } else {
-                alert("Algo salió mal. Intenta de nuevo. :(")
+                alert(e)
 			}
-			
+
 		}
 	}
 }
@@ -90,7 +89,7 @@ export const getUser = uid => {
 		} catch (e) {
 
 			alert(e)
-			
+
 		}
 	}
 }

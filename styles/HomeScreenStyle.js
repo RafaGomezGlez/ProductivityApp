@@ -9,14 +9,6 @@ const heightAppScreen = heightScreen * 1.20
 const heightTop = heightScreen * 0.725
 const widthCards = Math.round((widthScreen - (widthScreen * .08)) / 2)
 
-const scale = 375;
-
-const scaling = (fontSize) => {
-  const ratio = fontSize / scale;
-  const newSize = Math.round(ratio * width);
-  return newSize;
-}
-
 const styles = StyleSheet.create({
   screenStyle:{
     paddingTop: Constants.statusBarHeight,
@@ -36,11 +28,11 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 35,
   },
   title:{
-    fontSize: 33,
+    fontSize: 0.08 * widthScreen,
     fontWeight: "600",
   },
   name:{
-    fontSize: 33,
+    fontSize: 0.08 * widthScreen,
     fontWeight: "bold",
   },
   iconStyle:{
@@ -60,7 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around"
   },
   textYourGoals: {
-    fontSize: 25,
+    fontSize: 0.061 * widthScreen,
     fontWeight: "bold",
   },
   frameYourGoals: {

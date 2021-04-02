@@ -30,26 +30,26 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     color: "white",
-    fontSize: 22,
+    fontSize: 0.054 * widthScreen,
   },
   inputs: {
     marginTop: "7%",
     flexDirection: 'row',
   },
   textInput: {
-    fontSize: 58,
+    fontSize: 0.14 * widthScreen,
     alignSelf: "flex-end",
   },
   subindex: {
     alignSelf: "flex-end",
     color: "#616161",
-    fontSize: 18,
+    fontSize: 0.044 * widthScreen,
   },
   okButton: {
     marginTop: "4%"
   },
   okText: {
-    fontSize: 22,
+    fontSize: 0.054 * widthScreen,
     color: "#1389CE"
   }
 });
