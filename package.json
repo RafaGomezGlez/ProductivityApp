@@ -32,7 +32,7 @@
     "@react-native-community/datetimepicker": "3.0.4",
     "react-native-vector-icons/FontAwesome5": "*",
     "@react-native-async-storage/async-storage": "*",
-    "react-native-vector-icons/MaterialCommunityIcons": "*"
+    "react-native-vector-icons/MaterialCommunityIcons": "*",
     "react-native-ionicons": "^4.6.5",
     "react-native-paper": "^4.5.0",
     "react-native-safe-area-context": "3.1.9",
