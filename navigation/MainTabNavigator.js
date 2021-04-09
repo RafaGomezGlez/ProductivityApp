@@ -38,6 +38,8 @@ function MainTabNavigator() {
             inactiveTintColor: 'gray',
             labelStyle: {fontSize: 15},
             inactiveBackgroundColor: 'white',
+            style: { height: 55 }
+
           }}
         >
           <Tab.Screen name="Home" component={HomeStackScreen} />

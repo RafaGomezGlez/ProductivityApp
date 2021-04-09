@@ -1,10 +1,12 @@
 import React from 'react'
-import {StyleSheet} from 'react-native'
+import {StyleSheet, Dimensions} from 'react-native'
+
+const heightScreen = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   card: {
     borderRadius: 15,
-    height: 250,
+    height: heightScreen * .31,
     padding: 50,
     marginLeft: 5,
     marginRight: 5,

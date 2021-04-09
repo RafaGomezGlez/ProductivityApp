@@ -54,7 +54,7 @@ class StatisticsPage extends React.Component {
     this.setFocusDay();
   }
 
-  setTime = () => { 
+  setTime = () => {
     this.setState({
       dateChoosen: dicc[today.getDay()] + today.getDate().toString(),
     });
@@ -79,7 +79,7 @@ class StatisticsPage extends React.Component {
   changeDate = (day) => {
     this.setState({ dateChoosen: day.day + day.date });
     this.state.goal.days.map((dia)=>{
-      dia.day + dia.date === day.day + day.date 
+      dia.day + dia.date === day.day + day.date
       ? this.setState({day:dia})
       : null
     })
@@ -93,20 +93,20 @@ class StatisticsPage extends React.Component {
       day:meta.days[0],
       dateChoosen: meta.days[0].day+meta.days[0].date
       })
-      : null; 
+      : null;
     })
   };
 
 
-  
+
   onPressCompGraph = () =>{
-  
+
   var colorCode = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-  
+
   this.setState({
-  
+
     colorHolder : colorCode
-  
+
   })
 
   }

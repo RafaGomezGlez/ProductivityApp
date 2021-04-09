@@ -7,6 +7,7 @@ import ProgressChart from '../components/ProgressCircle'
 import TasksHomePage from '../components/TasksHomePage'
 import CardTask from '../components/CardTask'
 import AddCardTask from '../components/AddCardTask'
+import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
 
 import {styles, widthCards, heightScreen, widthScreen} from '../styles/HomeScreenStyle'
 
@@ -34,9 +35,19 @@ export default class HomePage extends React.Component{
       category: task.category,
       repetition: task.repetition,
       days: task.days,
-      text: task.category + " " + task.repetition + " " + task.days,
-      color: "#00A6FF",
+      text: task.category + " " + task.mainColor + " " + task.repetition + " " + task.days,
+      mainColor: task.mainColor,
+      brighterColor: task.brighterColor,
+      darkerColor: task.darkerColor,
     }
+    if (task.cuantification !== "none"){
+      newItem["cuantification"] = task.cuantification
+      newItem["quantityCuantification"] = task.quantityCuantification
+    }
+    else {
+      newItem["cuantification"] = "none"
+    }
+    console.log(newItem)
     this.setState({
       carouselItems: [newItem, ...this.state.carouselItems]
     })
@@ -74,6 +85,9 @@ export default class HomePage extends React.Component{
   _navigateCardTask = (item) => {
     this.props.navigation.navigate('TaskPage', {
       removeTask: this.removeTask,
+      mainColor: item.mainColor,
+      brighterColor: item.brighterColor,
+      darkerColor: item.darkerColor,
       item: item,
     })
   }
@@ -93,7 +107,7 @@ export default class HomePage extends React.Component{
   render(){
     return (
       <ScrollView style={styles.screenStyle}>
-      <StatusBar backgroundColor="#017AC1" barStyle={'dark-content'}/>
+      <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="#017AC1"/>
         <View style={styles.topScreenStyle}>
           <View style={styles.iconStyle}><AntDesign name="user" size={55}/></View>
           <View style={styles.textTitleSection}>
