@@ -8,7 +8,7 @@ const LoginStack = createStackNavigator();
 
 function LoginStackNavigator() {
   return(
-        <LoginStack.Navigator headerMode="none">
+        <LoginStack.Navigator headerMode="screen">
           <LoginStack.Screen
             name="LoginScreen"
             component={LoginScreen}
@@ -19,6 +19,11 @@ function LoginStackNavigator() {
           <LoginStack.Screen
             name="SignUpScreen"
             component={SignUpScreen}
+            options={{
+              headerShown:true,
+              title: "Register",
+              headerTitle: 'Create a new account'
+            }}
           />
         </LoginStack.Navigator>
   );

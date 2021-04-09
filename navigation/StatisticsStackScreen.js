@@ -1,11 +1,12 @@
 import React from 'react';
-import {} from  'react-native'
+import {Dimensions} from  'react-native'
 
 import { createStackNavigator } from '@react-navigation/stack';
 
 import StatisticsScreen from '../screens/StatisticsPage'
 
 const StatisticsStack = createStackNavigator();
+const screenWidth = Dimensions.get('window').width;
 
 function StatisticsStackScreen(){
   return (
@@ -14,19 +15,20 @@ function StatisticsStackScreen(){
         name = "Statistics"
         component = {StatisticsScreen}
         options = {{
+          headerShown: false,
           headerStyle:{
-            backgroundColor: '#2D4D73'
-          },
-          headerTintColor: '#fff',
-          headerTytleStyle: {
-            fontWeight: 'bold'
+            backgroundColor: '#DADADA',
+          }, 
+          headerTitleStyle:{
+            fontSize: screenWidth*0.09,
+            color: '#5D4D4A',
           }
         }}
       />
     </StatisticsStack.Navigator>
 
   )
-}
+} 
 
 
 

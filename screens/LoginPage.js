@@ -25,7 +25,7 @@ import {
     getUser,
 } from '../actions/user'
 
-const image = { uri: 'https://www.hiltonaffiliates.com/assets/img/Canopy/canopy-city-view-1680x758.jpg' };
+const image = { uri: 'https://wallpaperset.com/w/full/4/6/3/105103.jpg' };
 
 
 class LoginScreen extends React.Component {
@@ -62,12 +62,13 @@ class LoginScreen extends React.Component {
                 <ImageBackground  
                     style={styles.backgroundImage} 
                     source={image}
+                    blurRadius={10}
                 >
-                  <View style={{backgroundColor:'white', borderRadius: 30}} >
+                  <View style={{backgroundColor:'rgb(255,255,255)', borderRadius: 30}} >
                   
 
 
-                    <Text style={styles.title}> Bienvenido </Text>
+                    <Text style={styles.title}> Welcome! </Text>
                 
                     <View style={styles.iconField}>
 
@@ -79,12 +80,11 @@ class LoginScreen extends React.Component {
 
                         <TextInput
                             onChangeText={email => this.props.updateEmail(email)}
-                            value={this.props.user.email}
                             autoCompleteType={'email'}
                             clearButtonMode={'while-editing'}
                             returnKeyLabel={'next'}
                             returnKeyType={'next'}
-                            placeholder={'Correo Electrónico'}
+                            placeholder={'Email'}
                             placeholderTextColor = '#58595c'
                             style={styles.textInput}
                             keyboardType = {'email-address'}
@@ -102,12 +102,11 @@ class LoginScreen extends React.Component {
 
                         <TextInput 
                             onChangeText={password => this.props.updatePassword(password)}
-                            value={this.props.user.password}
                             autoCompleteType={'password'}
                             clearButtonMode={'while-editing'}
                             returnKeyLabel={'done'}
                             returnKeyType={'done'}
-                            placeholder={'Contraseña'}
+                            placeholder={'Password'}
                             placeholderTextColor = '#58595c'
                             secureTextEntry={true}
                             style={styles.textInput}
@@ -118,22 +117,22 @@ class LoginScreen extends React.Component {
 
                     <TouchableOpacity style={{alignItems:'center'}}
                     >
-                        <Text style={styles.forgotPassword}>Olvidaste tu Contraseña</Text>
+                        <Text style={styles.forgotPassword}>Forgot password?</Text>
                     </TouchableOpacity>
                     
-                    <View style={{marginTop: 25, alignItems:'center'}}>
+                    <View style={{marginTop: 25, marginHorizontal:55}}>
 
-                        <TouchableNativeFeedback 
+                        <TouchableOpacity
                             activeOpacity={0.8} 
                             underlayColor="#ffffff"
                             onPress={this.logInMail}
                         >
 
                             <View style={styles.buttonText}>
-                                <Text style={{color: 'black',fontSize:20,fontWeight:'bold'}}> Iniciar Sesión </Text>
+                                <Text style={{color: 'white',fontSize:20,fontWeight:'bold',textAlign:'center'}}> LOG IN </Text>
                             </View>
 
-                        </TouchableNativeFeedback>
+                        </TouchableOpacity>
                     </View>
 
                     <View>
@@ -143,8 +142,8 @@ class LoginScreen extends React.Component {
                           width: "100%",
                           backgroundColor: "#CED0CE",
                         }}/>
-                        <View style={{backgroundColor:"#CED0CE", alignSelf:'center',borderRadius:30, padding:5}}>
-                        <Text style={{textAlign:'center',color:'black', fontWeight:'bold'}}> O INICIA CON </Text>
+                        <View style={{alignSelf:'center', padding:5}}>
+                        <Text style={{textAlign:'center',color:'black', fontWeight:'bold'}}> OR LOG IN WITH </Text>
                         </View>
                     </View>
 
@@ -176,7 +175,7 @@ class LoginScreen extends React.Component {
                         >
 
                             <View style={styles.buttonText2}>
-                                <Icon name={'facebook'} size={40} color={'blue'}/>
+                                <Icon name={'facebook'} size={40} color={'#3b5998'}/>
                   
                             </View>
 
@@ -187,16 +186,16 @@ class LoginScreen extends React.Component {
                     <TouchableOpacity style={{alignItems:'center'}}
                       onPress={this.logInAnon}
                     >
-                        <Text style={{fontStyle:'italic'}}>Inicia sin registro</Text>
+                        <Text style={{fontStyle:'italic'}}>Anonymous log in</Text>
                     </TouchableOpacity>
 
                     <FocusAwareStatusBar  barStyle="dark-content" backgroundColor="auto"/>
                     </View>
-                    <Text style={[styles.forgotPassword,{marginTop:15}]}>¿No tienes una cuenta?</Text>
+                    <Text style={[styles.forgotPassword,{marginTop:15}]}>Don't have an account?</Text>
                     <TouchableOpacity style={{alignItems:'center'}}
                       onPress={()=>this.props.navigation.navigate("SignUpScreen")}
                     >
-                        <Text style={{fontStyle:'italic', fontSize:20, fontWeight:'bold',color:'white', marginTop: 3}}>REGÍSTRATE</Text>
+                        <Text style={{fontStyle:'italic', fontSize:20, fontWeight:'bold',color:'white', marginTop: 3}}>SIGN UP FOR FREE</Text>
                     </TouchableOpacity>
                 </ImageBackground>
             </View>
@@ -243,7 +242,7 @@ const styles = StyleSheet.create({
         elevation: 8,
         shadowColor: '#0047BB',
         shadowRadius: 8,
-        backgroundColor: '#6ef3d6'
+        backgroundColor: '#3ec1d3'
     },
 
     buttonText2: {
@@ -253,7 +252,8 @@ const styles = StyleSheet.create({
     forgotPassword: {
         color: 'black',
         fontSize: 12,
-        textAlign:'center'
+        textAlign:'center',
+        textDecorationLine: 'underline',
     },
         
     backgroundImage:{
