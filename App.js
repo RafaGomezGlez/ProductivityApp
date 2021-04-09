@@ -23,7 +23,7 @@ const persistConfig = {
   }
 const persistedReducer = persistReducer(persistConfig, reducer)
 const store = createStore(persistedReducer, middleware)
-const persistore = persistStore(store)
+const persistore = persistStore(store) 
 
 
 //This is going to be like this in order to create a login screen

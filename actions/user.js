@@ -4,6 +4,8 @@ import Firebase from '../firebase/firebase'
 
 export const UPDATE_EMAIL = 'UPDATE_EMAIL'
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
+export const UPDATE_USERNAME = 'UPDATE_USERNAME'
+export const UPDATE_LOADING = 'UPDATE_LOADING'
 export const LOGIN = 'LOGIN'
 export const SIGNUP = 'SIGNUP'
 export const LOGINANON = 'LOGINANON'
@@ -22,6 +24,19 @@ export const updatePassword = password => {
 	}
 }
 
+export const updateUsername = username => {
+	return {
+		type: UPDATE_USERNAME,
+		payload: username
+	}
+}
+
+export const updateLoading = loading => {
+	return {
+		type: UPDATE_LOADING,
+		payload: loading
+	}
+}
 
 export const login = () => {
 	return async (dispatch, getState) => {
@@ -103,13 +118,10 @@ export const signup = () => {
 			if (response.user.uid) {
 				const user = {
 					uid: response.user.uid,
-					email: email
-				}
-
-				db.collection('users')
-					.doc(response.user.uid)
-					.set(user)
-
+					email: email,
+          loading: false, 
+				}    
+        
 				dispatch({ type: SIGNUP, payload: user })
 			}
 		} catch (e) {
