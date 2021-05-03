@@ -49,23 +49,31 @@ const styles = StyleSheet.create({
   },
   leftTab: {
     height: heightScreen * .055,
-    width: widthScreen * .25,
+    width: widthScreen * .45,
     borderWidth: 2,
     borderRightWidth: 1,
-    borderBottomWidth: 0,
     borderTopLeftRadius: 7,
+    borderBottomLeftRadius: 7,
     alignItems: 'center',
     justifyContent: 'center',
   },
   rightTab: {
-    width: widthScreen * .25,
+    width: widthScreen * .45,
     borderWidth: 2,
     borderLeftWidth: 1,
-    borderBottomWidth: 0,
     borderTopRightRadius: 7,
+    borderBottomRightRadius: 7,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: '#1389CE'
+  },
+  oneTab: {
+    width: widthScreen * .9,
+    height: heightScreen * .055,
+    borderWidth: 2,
+    marginLeft: widthScreen * .04,
+    borderRadius: 7,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   tabActive: {
     backgroundColor: "#1389CE"
@@ -78,10 +86,6 @@ const styles = StyleSheet.create({
   },
   textTabInactive: {
     color: "black"
-  },
-  graphGrouping: {
-    alignItems: 'center',
-    marginTop: heightScreen * .1,
   },
   yourdaysSquare: {
     marginLeft: widthScreen * .04,

@@ -1,10 +1,9 @@
 import React from 'react';
 import {Alert, View, Text, Button, ScrollView, StatusBar} from 'react-native'
-import { Ionicons, AntDesign } from '@expo/vector-icons'
+import {  AntDesign } from '@expo/vector-icons'
 
 import Carousel from 'react-native-snap-carousel';
 import ProgressChart from '../components/ProgressCircle'
-import TasksHomePage from '../components/TasksHomePage'
 import CardTask from '../components/CardTask'
 import AddCardTask from '../components/AddCardTask'
 import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
@@ -34,6 +33,9 @@ export default class HomePage extends React.Component{
       title: task.name,
       category: task.category,
       repetition: task.repetition,
+      times: task.times,
+      daysToDo: task.daysToDo,
+      completedTimes: task.completedTimes,
       days: task.days,
       text: task.category + " " + task.mainColor + " " + task.repetition + " " + task.days,
       mainColor: task.mainColor,
@@ -47,7 +49,6 @@ export default class HomePage extends React.Component{
     else {
       newItem["cuantification"] = "none"
     }
-    console.log(newItem)
     this.setState({
       carouselItems: [newItem, ...this.state.carouselItems]
     })
@@ -63,17 +64,26 @@ export default class HomePage extends React.Component{
           this.setState({
             carouselItems: this.state.carouselItems.filter(carousel =>
               carousel.title !== title
-            )
-          })
+            )})
           this.carousel.triggerRenderingHack()
           this.props.navigation.goBack()
-        }
-      },
-      {
-        text: "Cancel",
-      }
+        }},
+      {  text: "Cancel", }
       ],
     );
+  }
+
+  continueTask = (title) => {
+    //console.log(title)
+    this.setState({
+      carouselItems: this.state.carouselItems.map(elem => {
+        if(elem.title === title) {
+          elem.completedTimes += 1
+          return elem
+        }
+        return elem
+      })
+    })
   }
 
   _navigateFormulary = () => {
@@ -84,10 +94,12 @@ export default class HomePage extends React.Component{
 
   _navigateCardTask = (item) => {
     this.props.navigation.navigate('TaskPage', {
+      continueTask: this.continueTask,
       removeTask: this.removeTask,
       mainColor: item.mainColor,
       brighterColor: item.brighterColor,
       darkerColor: item.darkerColor,
+      title: item.title,
       item: item,
     })
   }

@@ -3,8 +3,7 @@ import {View, ScrollView, Text, TouchableOpacity} from 'react-native'
 import { Ionicons, AntDesign, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons'
 
 import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
-import Graph from '../components/IndividualGraph';
-
+import Calendar from '../components/Calendar'
 
 import styles from '../styles/taskScreenStyles'
 
@@ -16,9 +15,12 @@ export default class TaskPage extends React.Component{
     this.state = {
       tabWeek: true,
       tabCalendar: false,
-      mainColor: this.props.route.params.mainColor,
-      darkerColor: this.props.route.params.darkerColor,
-      brighterColor: this.props.route.params.brighterColor,
+      daysToDo: this.props.route.params.item.daysToDo,
+      cuantification: this.props.route.params.item.cuantification,
+      repetition: this.props.route.params.item.repetition,
+      mainColor: this.props.route.params.item.mainColor,
+      darkerColor: this.props.route.params.item.darkerColor,
+      brighterColor: this.props.route.params.item.brighterColor,
     }
   }
 
@@ -33,34 +35,36 @@ export default class TaskPage extends React.Component{
           <FontAwesome5 name='running' size={90}/>
         </View>
         <View style={styles.continue}>
+          {this.state.cuantification === "time" ?
           <TouchableOpacity>
             <MaterialCommunityIcons name='timer-outline' size={75}/>
-          </TouchableOpacity>
-          <TouchableOpacity>
+          </TouchableOpacity> : null }
+          <TouchableOpacity onPress={() => this.props.route.params.continueTask(this.props.route.params.title)}>
             <Text style={styles.textContinue}> Continue </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.yourDaysGrouping}>
-          <Text style={styles.yourDaysText}> Tus días </Text>
-        </View>
-        <View style={styles.tabsGrouping}>
-          <TouchableOpacity
-          style={[styles.leftTab, {borderColor: this.state.mainColor}, this.state.tabWeek ? {backgroundColor: this.state.mainColor} : styles.tabInactive]}
-          onPress={() => this.setState({tabWeek: true, tabCalendar: false})}>
-            <Text style={this.state.tabWeek ? styles.textTabActive : styles.textTabInactive}> Esta semana </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-          style={[styles.rightTab, {borderColor: this.state.mainColor}, this.state.tabCalendar ? {backgroundColor: this.state.mainColor} : styles.tabInactive]}
-          onPress={() => this.setState({tabWeek: false, tabCalendar: true})}>
-            <Text style={this.state.tabCalendar ? styles.textTabActive : styles.textTabInactive}> Calendario </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={[styles.yourdaysSquare, {borderColor: this.state.mainColor}]}>
-        </View>
 
-        <View style={styles.graphGrouping}>
-          <Graph goal={{percentage: 50}} width={300 * 0.55} color="green" />
-        </View>
+        {this.state.repetition === "day" ? 
+         <View style={styles.tabsGrouping}>
+         <TouchableOpacity
+         style={[styles.leftTab, {borderColor: this.state.mainColor}, this.state.tabWeek ? {backgroundColor: this.state.mainColor} : styles.tabInactive]}
+         onPress={() => this.setState({tabWeek: true, tabCalendar: false})}>
+           <Text style={this.state.tabWeek ? styles.textTabActive : styles.textTabInactive}> Semana </Text>
+         </TouchableOpacity>
+         <TouchableOpacity
+         style={[styles.rightTab, {borderColor: this.state.mainColor}, this.state.tabCalendar ? {backgroundColor: this.state.mainColor} : styles.tabInactive]}
+         onPress={() => this.setState({tabWeek: false, tabCalendar: true})}>
+           <Text style={this.state.tabCalendar ? styles.textTabActive : styles.textTabInactive}> Calendario </Text>
+         </TouchableOpacity>
+       </View>
+       : 
+       <View style={[styles.oneTab, {borderColor: this.state.mainColor}, {backgroundColor: this.state.mainColor}]}>
+         <Text style={styles.textTabActive}>{this.state.repetition === "week" ? "Semana" : "Mes"}</Text>
+       </View>
+       }
+      
+
+        {this.state.tabCalendar ? <Calendar daysToDo={this.state.daysToDo}/> : null}
 
 
       </ScrollView>

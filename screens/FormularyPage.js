@@ -8,24 +8,26 @@ import FocusAwareStatusBar from '../components/FocusAwareStatusBar'
 import ModalView from '../components/ModalView'
 import ModalViewTime from '../components/ModalViewTime'
 
+import calculateDays from '../components/calculateDays';
+
 import styles from '../styles/FormularyStyles'
 
 class FormularyPage extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      task: '',
+      task: 'testing',
       switchEnabled: false,
       buttonDisabled: false,
-      timesToDo: 0,
+      timesToDo: 25,
       repeat: 0,
-      time: [0, 0], 
+      time: [0, 0],
       modalTitle: "",
       elementToChangeModal: "",
       modalActive: false,
       modalTimeActive: false,
       elemChips: [
-        { key: 'Trabajo', mainColor: "#1365CF", brighterColor: "#9DB8DD", darkerColor: "#0154C1",  status: false },
+        { key: 'Trabajo', mainColor: "#1365CF", brighterColor: "#9DB8DD", darkerColor: "#0154C1",  status: true },
         { key: 'Deportes', mainColor: "#BC0701", brighterColor: "#D18885", darkerColor: "#9D0601",  status: false },
         { key: 'Salud', mainColor: "#29BC01", brighterColor: "#72EC51", darkerColor: "#239D01",  status: false },
         { key: 'Cultura', mainColor: "#CE6213", brighterColor: "#FCB27E", darkerColor: "#C15101", status: false },
@@ -42,13 +44,13 @@ class FormularyPage extends React.Component{
         { key: 'month', status: false},
       ],
       days: [
-        { key:'D', status: false },
-        { key:'L', status: true },
-        { key:'Ma', status: true },
-        { key:'Mi', status: true },
-        { key:'J', status: true },
-        { key:'V', status: true },
-        { key:'S', status: false }
+        { key:'D', num: 0, status: false },
+        { key:'L', num: 1, status: true },
+        { key:'Ma', num: 2, status: true },
+        { key:'Mi', num: 3, status: true },
+        { key:'J', num: 4, status: true },
+        { key:'V', num: 5, status: true },
+        { key:'S', num: 6, status: false }
       ],
     }
   }
@@ -56,7 +58,7 @@ class FormularyPage extends React.Component{
   //For changing elemCuantification
   changeObj = (obj, cat) => {
     this.setState({
-      [obj]: this.state.[obj].map(elem => {
+      [obj]: this.state[obj].map(elem => {
         if(elem.key !== cat) return { key: elem.key, status: false }
         return { key: elem.key, status: !elem.status }
       })
@@ -65,7 +67,7 @@ class FormularyPage extends React.Component{
 
   changeRepetitions = (obj, cat) => {
     this.setState({
-      [obj]: this.state.[obj].map(elem => {
+      [obj]: this.state[obj].map(elem => {
         if(elem.key !== cat) return { key: elem.key, status: false }
         return { key: elem.key, status: true }
       })
@@ -91,8 +93,8 @@ class FormularyPage extends React.Component{
   selectDays = day => {
     this.setState({
       days: this.state.days.map(elem => {
-        if(elem.key !== day) return { key: elem.key, status: elem.status }
-        return { key: elem.key, status: !elem.status }
+        if(elem.key !== day) return { key: elem.key, num: elem.num, status: elem.status }
+        return { key: elem.key, num: elem.num, status: !elem.status }
       })
     })
   }
@@ -158,13 +160,16 @@ class FormularyPage extends React.Component{
       var brighterColor = label.brighterColor
       var darkerColor = label.darkerColor
       var times = this.state.timesToDo
+      parseInt(times)
       if(times === 0) throw "No has escogido veces"
       var repetition = this.state.elemRepetition.find(elem => elem.status === true)
       if(repetition === undefined) throw "No escogiste cuanto vas a repetir tu hábito"
       repetition = repetition.key
       if(repetition === 'day'){
-        var days =  this.state.days.flatMap(elem => elem.status === true ? [elem.key] : [])
+        var days =  this.state.days.filter(elem => elem.status === true)
+        days = days.map(elem => elem.num)
         if(days.length === 0) throw "No escogiste ningun día"
+        var daysToDo = calculateDays(days,times);
       }
       if(this.state.elemCuantification[0].status === true){
         var cuantification = "time"
@@ -187,14 +192,18 @@ class FormularyPage extends React.Component{
     }
     const task = {
       name: name,
+      times: times,
       category: category,
       mainColor: mainColor,
       brighterColor: brighterColor,
       darkerColor: darkerColor,
       repetition: repetition,
+      completedTimes: 0,
     }
-    if(task.repetition === 'day')
+    if(task.repetition === 'day'){
       task.days = days
+      task.daysToDo = daysToDo
+    }
     if(this.state.elemCuantification[0].status === true || this.state.elemCuantification[1].status === true){
       task.cuantification = cuantification
       task.quantityCuantification = quantityCuantification
@@ -202,6 +211,7 @@ class FormularyPage extends React.Component{
     else {
       task.cuantification = "none"
     }
+    //console.log(task.daysToDo)
 
     mounted = false
     this.props.route.params.addTask(task)

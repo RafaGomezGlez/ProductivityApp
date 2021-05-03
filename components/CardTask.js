@@ -7,10 +7,10 @@ const CardTask = props => {
   return(
 
   <TouchableOpacity onPress={props.navigateCardTask}>
-    <View style= {[styles.card, {backgroundColor: props.item.mainColor}]}
-      >
+    <View style= {[styles.card, {backgroundColor: props.item.mainColor}]}>
       <Text style={styles.text}>{props.item.title}</Text>
       <Text>{props.item.text}</Text>
+      <Text> {props.item.completedTimes}/{props.item.times} </Text>
     </View>
   </TouchableOpacity>
 )}
